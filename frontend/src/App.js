@@ -1,24 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+//import logo from "./logo.svg";
+import React, { useEffect, useState } from "react";
+import "./App.css";
+//import axios from "axios";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Products from "./Components/Products";
+import Home from "./Components/Home";
+//import data from "../../backend/data";
 
 function App() {
+  // const [products, setProducts] = useState([]);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const data = await axios.get("/api/products");
+  //     setProducts(data);
+  //   };
+  //   getData();
+  // }, []);
+
+  // const getData = () => {
+  //   const getData = async () => {
+  //     const data = await axios.get("localhost:5000/api/products");
+  //     setProducts(data);
+  //   };
+  // };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="products" element={<Products />} />
+      </Routes>
+    </Router>
+
+    // <div className="App">
+    //   <Products products={products} />
+    //   <h1 onClick={getData}>tracker</h1>
+    //    {products.map((product) => {
+    //     <ul key={product._id}>
+    //       <li>{product.name}</li>
+    //     </ul>;
+    //   })}
+    // </div>
   );
 }
 
