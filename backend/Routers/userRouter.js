@@ -1,3 +1,25 @@
 import express from "express";
+import expressAsyncHandler from "express-async-handler";
+import data from "../data.js";
+import User from "../Models/userModel.js";
 
-userRouter.get("/seed", async (req, res) => {});
+const userRouter = express.Router();
+
+userRouter.get(
+  "/",
+  expressAsyncHandler(async (req, res) => {
+    const users = await User.find({});
+    res.send({ users });
+  })
+);
+
+userRouter.get(
+  "/seed",
+  expressAsyncHandler(async (req, res) => {
+    //await User.remove({})
+    const createdUsers = await User.insertMany(data.users);
+    res.send({ createdUsers });
+  })
+);
+
+export default userRouter;
