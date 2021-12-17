@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Products from "./Products";
+import Products from "../Components/Products";
+import LoginForm from "../Components/Login/LoginForm";
 import axios from "axios";
+
 function Home() {
   const [prod, setProd] = useState([]);
   const [loading, setLoading] = useState([false]);
@@ -19,18 +21,23 @@ function Home() {
       setLoading(false);
     }
   }, []);
+
+  // <div>
+  //   <Products prod={prod} loading={loading} />
+  // </div>
+
   return (
-    <div>
-      {loading ? (
-        <h1>LOADING...</h1>
-      ) : error ? (
-        <h1>Error...</h1>
-      ) : (
-        <div>
-          <Products prod={prod} loading={loading} />
-        </div>
-      )}
-    </div>
+    <>
+      <div>
+        {loading ? (
+          <h1>LOADING...</h1>
+        ) : error ? (
+          <h1>Error...</h1>
+        ) : (
+          <h1>test</h1>
+        )}
+      </div>
+    </>
   );
 }
 

@@ -1,11 +1,17 @@
 //import logo from "./logo.svg";
 import React, { useEffect, useState } from "react";
+
 import "./App.css";
 //import axios from "axios";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Products from "./Components/Products";
-import Home from "./Components/Home";
+import Home from "./Views/Home";
+import LoginPage from "./Views/LoginPage";
+import RegisterPage from "./Views/Register";
+import Navbar from "./Components/Navbar/Navbar";
+
+//import Home from "./Components/Home";
 //import data from "../../backend/data";
 
 function App() {
@@ -26,9 +32,12 @@ function App() {
   // };
   return (
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="products" element={<Products />} />
+        {/*<Route path="/products" element={<Products />} />*/}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </Router>
 
