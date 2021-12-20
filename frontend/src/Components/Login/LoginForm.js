@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+//import { useDispatch, useSelector } from "react-redux";
 import "./LoginForm.scss";
 
-export default function LoginForm() {
+export default function LoginForm(props) {
+  console.log("props: ", props);
+  let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const submitHandler = (e) => {
+  //const [user, setUser] = useState("");
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-    // TODO: sign in action
+    let { data } = await axios.post("/api/users/signin", { email, password });
+    if (data) {
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      window.location.reload();
+      navigate("/", { replace: true });
+    }
   };
   return (
     <div className="full-screen-container">

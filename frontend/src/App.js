@@ -10,6 +10,7 @@ import Home from "./Views/Home";
 import LoginPage from "./Views/LoginPage";
 import RegisterPage from "./Views/Register";
 import Navbar from "./Components/Navbar/Navbar";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 //import Home from "./Components/Home";
 //import data from "../../backend/data";
@@ -34,8 +35,9 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        {/*<Route path="/products" element={<Products />} />*/}
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/" element={<Home />} />
+        </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>

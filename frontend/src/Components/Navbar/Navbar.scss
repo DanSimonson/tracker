@@ -6,10 +6,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 0 0 0; /*0 2rem;*/
-  //padding-right: 2rem;
+  padding: 0 0 0 0;
   font-size: 1.2rem;
-  //margin-top: 5rem;
 }
 
 .nav-logo {
@@ -22,7 +20,7 @@
   grid-template-columns: repeat(4, auto);
   grid-gap: 20px;
   list-style: none;
-  //margin-right: 2px;
+  margin-right: 2px;
 }
 
 .nav-link {
@@ -39,6 +37,12 @@
   display: none;
   font-size: 2rem;
   cursor: pointer;
+}
+.move-left {
+  margin-left: 1rem;
+}
+.move-right {
+  margin-right: 1rem;
 }
 
 @media only screen and (max-width: 500px) {
@@ -63,9 +67,10 @@
   }
 
   .nav-item {
-    padding: 10px 0;
-    border-top: 1px solid red;
-    border-bottom: 1px solid red;
+    margin-right: 4rem;
+    // padding: 10px 0;
+    // border-top: 1px solid red;
+    // border-bottom: 1px solid red;
   }
 
   .nav-icon {

@@ -22,10 +22,6 @@ function Home() {
     }
   }, []);
 
-  // <div>
-  //   <Products prod={prod} loading={loading} />
-  // </div>
-
   return (
     <>
       <div>

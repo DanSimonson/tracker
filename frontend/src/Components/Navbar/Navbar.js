@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 import "./Navbar.scss";
 
 function Navbar() {
@@ -16,8 +17,8 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="nav-logo" style={{ marginLeft: "1rem" }}>
-        Logo
+      <Link to="/" className="nav-logo move-left">
+        mariposaweb
       </Link>
       <div onClick={handleClick} className="nav-icon">
         {open ? <FiX /> : <FiMenu />}
@@ -29,20 +30,24 @@ function Navbar() {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/about" className="nav-link" onClick={closeMenu}>
-            About
+          <Link to="/login" className="nav-link" onClick={closeMenu}>
+            Login
           </Link>
         </li>
-        <li className="nav-item">
-          <Link to="/shop" className="nav-link" onClick={closeMenu}>
-            Shop
+        {/* <li className="nav-item">
+          <Link to="/Register" className="nav-link" onClick={closeMenu}>
+            Register
           </Link>
-        </li>
-        <li className="nav-item" style={{ marginRight: "1rem" }}>
-          <Link to="/contact" className="nav-link" onClick={closeMenu}>
+        </li> */}
+        {/* <li className="nav-item">
+          <Link
+            to="/contact"
+            className="nav-link move-right"
+            onClick={closeMenu}
+          >
             Contact
           </Link>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );
