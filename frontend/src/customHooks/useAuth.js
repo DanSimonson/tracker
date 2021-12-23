@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const useAuth = () => {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState({});
   useEffect(() => {
     let tempUser = JSON.parse(localStorage.getItem("userInfo"));
     setUser(tempUser);

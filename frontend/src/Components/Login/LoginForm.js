@@ -2,15 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-//import { useDispatch, useSelector } from "react-redux";
 import "./LoginForm.scss";
 
 export default function LoginForm(props) {
-  console.log("props: ", props);
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  //const [user, setUser] = useState("");
+  const [user, setUser] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();

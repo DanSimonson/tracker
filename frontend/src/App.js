@@ -1,10 +1,7 @@
-//import logo from "./logo.svg";
 import React, { useEffect, useState } from "react";
-
 import "./App.css";
-//import axios from "axios";
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import useAuth from "./customHooks/useAuth";
 import Products from "./Components/Products";
 import Home from "./Views/Home";
 import LoginPage from "./Views/LoginPage";
@@ -12,25 +9,9 @@ import RegisterPage from "./Views/RegisterPage";
 import Navbar from "./Components/Navbar/Navbar";
 import ProtectedRoutes from "./ProtectedRoutes";
 
-//import Home from "./Components/Home";
-//import data from "../../backend/data";
-
 function App() {
-  // const [products, setProducts] = useState([]);
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const data = await axios.get("/api/products");
-  //     setProducts(data);
-  //   };
-  //   getData();
-  // }, []);
+  useEffect(() => {}, []);
 
-  // const getData = () => {
-  //   const getData = async () => {
-  //     const data = await axios.get("localhost:5000/api/products");
-  //     setProducts(data);
-  //   };
-  // };
   return (
     <Router>
       <Navbar />

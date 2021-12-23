@@ -10,9 +10,21 @@ export default function LoginForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [user, setUser] = useState("");
+
+  useEffect(() => {
+    //let temp = getItem('userInfo')
+    //let temp = localStorage.getItem("key") || "{}";
+    //setUser(JSON.parse(temp));
+  });
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    // if (user) {
+    //   console.log("user: ", user);
+    // } else {
+    //   console.log("no user found");
+    // }
     if (password !== confirmPassword) {
       alert("Password and confirm password are not match");
     } else {
@@ -33,7 +45,7 @@ export default function LoginForm(props) {
         {/* <div className="topSpacer"></div> */}
         <form className="form" onSubmit={submitHandler}>
           <div>
-            <h1 className="firstFormh1">Register</h1>
+            <h1 className="firstFormh1">Create New Account</h1>
           </div>
           <div>
             <label htmlFor="name">User Name</label>
