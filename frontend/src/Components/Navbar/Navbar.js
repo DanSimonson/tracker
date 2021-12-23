@@ -57,25 +57,14 @@ function Navbar() {
           </li>
         ) : (
           <>
-            <li className="nav-item">{tokenedUser.name}</li>
-            <li
-              className="nav-item"
-              onClick={logout}
-              style={{ cursor: "pointer" }}
-            >
-              Logout
+            <li className="nav-logout">
+              <a>{tokenedUser.name} </a>
+            </li>
+            <li className="nav-logout" onClick={logout}>
+              <a>Logout</a>
             </li>
           </>
         )}
-        {/* {user ? (
-          <li className="nav-item">
-            <Link to="/login" className="nav-link" onClick={logout}>
-              Logout
-            </Link>
-          </li>
-        ) : (
-          <li className="nav-item"></li>
-        )} */}
       </ul>
     </nav>
   );
