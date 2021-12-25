@@ -12,11 +12,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUsers } from "./Redux/usersSlice";
 
 function App() {
-  const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.users);
-  useEffect(() => {
-    dispatch(getUsers());
-  }, []);
+  // const dispatch = useDispatch();
+  // const { users } = useSelector((state) => state.users);
+  // useEffect(() => {
+  //   dispatch(getUsers());
+  // }, []);
 
   return (
     <Router>

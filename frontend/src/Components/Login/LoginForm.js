@@ -12,6 +12,8 @@ export default function LoginForm(props) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    //let users = await axios.get("/api/users");
+    //console.log("users: ", users);
     let { data } = await axios.post("/api/users/signin", { email, password });
     if (data) {
       localStorage.setItem("userInfo", JSON.stringify(data));

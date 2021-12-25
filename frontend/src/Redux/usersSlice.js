@@ -1,12 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-//import userRouter from "../../../backend/Routers/userRouter";
+import axios from "axios";
 
 export const getUsers = createAsyncThunk(
   "users/getUsers",
   async (dispatch, getState) => {
-    return await fetch("https://jsonplaceholder.typicode.com/users").then(
-      (res) => res.json()
-    );
+    let users = await axios.get("/api/users");
+    if (users) {
+      return users.data.users;
+    }
+    console.log("users: ", users);
+    // return await fetch("https://jsonplaceholder.typicode.com/users").then(
+    //   (res) => res.json()
+    // );
   }
 );
 
