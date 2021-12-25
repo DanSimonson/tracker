@@ -8,9 +8,15 @@ import LoginPage from "./Views/LoginPage";
 import RegisterPage from "./Views/RegisterPage";
 import Navbar from "./Components/Navbar/Navbar";
 import ProtectedRoutes from "./ProtectedRoutes";
+import { useSelector, useDispatch } from "react-redux";
+import { getUsers } from "./Redux/usersSlice";
 
 function App() {
-  useEffect(() => {}, []);
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.users);
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
 
   return (
     <Router>

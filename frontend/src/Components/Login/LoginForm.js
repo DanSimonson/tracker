@@ -17,7 +17,6 @@ export default function LoginForm(props) {
       localStorage.setItem("userInfo", JSON.stringify(data));
       window.location.reload();
       navigate("/");
-      //, { replace: true }
     }
   };
   return (
