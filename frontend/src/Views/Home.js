@@ -7,10 +7,9 @@ import { getUsers } from "../Redux/usersSlice";
 
 function Home() {
   const dispatch = useDispatch();
-  const { users, status } = useSelector((state) => state.users);
-  console.log("status: ", status);
-  console.log("users: ", users);
-
+  const newState = useSelector((state) => state);
+  console.log("newState: ", newState);
+  const { users, status, isAdmin } = useSelector((state) => state.users);
   const [prod, setProd] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -18,21 +17,6 @@ function Home() {
   useEffect(() => {
     dispatch(getUsers());
   }, []);
-  //useEffect(() => {
-  //let { data } = await axios.post("/api/users/", { email, password });
-  // try {
-  //   const getData = async () => {
-  //     //setLoading(true);
-  //     //const data = await axios.get("/api/products");
-  //     //setLoading(false);
-  //     //setProd(data);
-  //   };
-  //   getData();
-  // } catch (error) {
-  //   console.log("error", error.message);
-  //   //setLoading(false);
-  // }
-  //}, []);
 
   return (
     <>

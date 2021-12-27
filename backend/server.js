@@ -15,11 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //routes
-//app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.get("/api/products", (req, res) => {
   res.send(data.products);
-  //console.log("data.products: ", data.products);
 });
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
