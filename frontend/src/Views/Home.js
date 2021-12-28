@@ -15,7 +15,11 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [randomInput, setRandomInput] = useState("");
-  const [seconds, setSeconds] = useState(20);
+  //const [seconds, setSeconds] = useState(20);
+  const [workTime, setWorkTime] = useState("");
+  const [focus, setFocus] = useState("");
+  const [rest, setRest] = useState("");
+  const [breakTime, setBreakTime] = useState("");
   const renders = useRef(0);
   const inputRef = useRef();
   const timerId = useRef();
@@ -29,13 +33,27 @@ function Home() {
     renders.current++;
   };
 
+  // const startTimer = () => {
+  //   timerId.current = setInterval(() => {
+  //     renders.current++;
+  //     setSeconds((prev) => prev - 1);
+  //   }, 1000);
+  //inputRef.current.focus();
+  //};
   const startTimer = () => {
     timerId.current = setInterval(() => {
       renders.current++;
-      setSeconds((prev) => prev - 1);
+      setWorkTime((prev) => prev - 1);
     }, 1000);
+    setFocus("");
     //inputRef.current.focus();
   };
+
+  // const stopTimer = () => {
+  //   clearInterval(timerId.current);
+  //   timerId.current = 0;
+  //   //inputRef.current.focus();
+  // };
 
   const stopTimer = () => {
     clearInterval(timerId.current);
@@ -43,15 +61,27 @@ function Home() {
     //inputRef.current.focus();
   };
 
-  const resetTimer = () => {
-    stopTimer();
-    if (seconds) {
-      renders.current++;
-      setSeconds(0);
-    }
-    //inputRef.current.focus();
+  // const resetTimer = () => {
+  //   stopTimer();
+  //   if (seconds) {
+  //     renders.current++;
+  //     setSeconds(0);
+  //   }
+  //   //inputRef.current.focus();
+  // };
+  const handelWorkChange = (e) => {
+    setFocus(parseInt(e.target.value));
+    //console.log("focus: ", focus);
   };
-  const submitForm = () => {};
+  const handleBreakChange = (e) => {
+    setRest(parseInt(e.target.value));
+    //console.log("rest: ", rest);
+  };
+  function submitForm(e) {
+    e.preventDefault();
+    setWorkTime(focus);
+    setBreakTime(rest);
+  }
 
   return (
     <>
@@ -81,7 +111,9 @@ function Home() {
           // </h1>
           <>
             <h1>Pomodro ⏲ with 🛎</h1>
-            <figure className="clock">
+            <p className="pomodoro">Work Time: {workTime}</p>
+            <p className="pomodoro">Break Time: {breakTime}</p>
+            {/* <figure className="clock">
               <div className="mins">0</div>
               <div>:</div>
               <div className="secs">00</div>
@@ -89,34 +121,48 @@ function Home() {
               <svg className="progress-ring" height="120" width="120">
                 <circle
                   className="progress-ring__circle"
-                  stroke-width="8"
+                  strokeWidth="8"
                   fill="transparent"
                   r="50"
                   cx="60"
                   cy="60"
                 />
               </svg>
-            </figure>
+            </figure> */}
             <div className="btn-group">
-              <button className="start">start focus</button>
+              <button className="start" onClick={startTimer}>
+                start focus
+              </button>
               <button className="reset">reset</button>
-              <button className="pause">pause</button>
+              <button className="pause" onClick={stopTimer}>
+                pause
+              </button>
             </div>
             <form onSubmit={submitForm}>
-              <label for="focusTime">Focus Time</label>
-              <input type="number" value="1" id="focusTime" />
-              <label for="breakTime">Break Time</label>
-              <input type="number" value="1" id="breakTime" />
+              <label htmlFor="focusTime">Work Time</label>
+              <input
+                type="number"
+                value={focus}
+                id="focusTime"
+                onChange={handelWorkChange}
+              ></input>
+              <label htmlFor="breakTime">Break Time</label>
+              <input
+                type="number"
+                value={rest}
+                id="breakTime"
+                onChange={handleBreakChange}
+              ></input>
               <button type="submit">Save settings</button>
             </form>
-            <section>
+            {/* <section>
               <button onClick={startTimer}>Start</button>
               <button onClick={stopTimer}>Stop</button>
               <button onClick={resetTimer}>Reset</button>
-            </section>
+            </section> */}
+            {/* <br />
             <br />
-            <br />
-            <p>Seconds: {seconds}</p>
+            <p>Seconds: {seconds}</p> */}
           </>
         ) : null}
       </div>
