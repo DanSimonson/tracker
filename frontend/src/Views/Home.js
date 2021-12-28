@@ -69,6 +69,16 @@ function Home() {
   //   }
   //   //inputRef.current.focus();
   // };
+
+  const resetTimer = () => {
+    stopTimer();
+    if (workTime) {
+      renders.current++;
+      setWorkTime(0);
+    }
+    //inputRef.current.focus();
+  };
+
   const handelWorkChange = (e) => {
     setFocus(parseInt(e.target.value));
     //console.log("focus: ", focus);
@@ -133,7 +143,9 @@ function Home() {
               <button className="start" onClick={startTimer}>
                 start focus
               </button>
-              <button className="reset">reset</button>
+              <button className="reset" onClick={resetTimer}>
+                reset
+              </button>
               <button className="pause" onClick={stopTimer}>
                 pause
               </button>
