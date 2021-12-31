@@ -17,6 +17,16 @@ function Timer() {
     return undefined;
   }, [isRunning]);
 
+  function toTime() {
+    console.log("seconds: ", seconds);
+    var date = new Date(null);
+    date.setSeconds(seconds);
+    setIsRunning(false);
+    setSeconds(0);
+    console.log("date: ", date.toISOString().substr(11, 8));
+    //return date.toISOString().substring(11, 8);
+  }
+
   return (
     <div className="app">
       <div className={`time-circle ${isRunning ? "" : "paused"} `}>
@@ -35,9 +45,8 @@ function Timer() {
         <button
           className="reset"
           //disabled={!isRunning}
-          onClick={() => {
-            setIsRunning(false);
-            setSeconds(0);
+          onClick={(seconds) => {
+            toTime(seconds);
           }}
         >
           Reset
