@@ -5,6 +5,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsers } from "../Redux/usersSlice";
 import Timer from "../Components/Timer/Timer";
+import Clock from "../Components/Clock/Clock";
 import "./Home.scss";
 
 function Home() {
@@ -16,7 +17,7 @@ function Home() {
     dispatch(getUsers());
   }, []);
 
-  return <Timer />;
+  return <Clock />;
 }
 
 export default Home;
