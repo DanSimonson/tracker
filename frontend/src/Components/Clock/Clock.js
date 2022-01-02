@@ -43,6 +43,12 @@ export default function Clock() {
     setStart(true);
     setMins("");
   };
+  const resetClock = (e) => {
+    e.preventDefault();
+    setStart(false);
+    setSeconds(1);
+    setMinutes(0);
+  };
 
   return (
     <div className="container">
@@ -73,6 +79,9 @@ export default function Clock() {
           />
           <button className="form-field" type="submit">
             Enter
+          </button>
+          <button className="form-field" onClick={(e) => resetClock(e)}>
+            Reset
           </button>
         </form>
       </div>
