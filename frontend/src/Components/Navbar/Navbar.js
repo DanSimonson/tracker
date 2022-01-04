@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
 import useAuth from "../../customHooks/useAuth";
 import "./Navbar.scss";
@@ -10,18 +10,13 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState([]);
   const [logged, setLogged] = useState({});
+  //let loggedIn;
   let tokenedUser = useAuth();
-  // useEffect(() => {
-  //   /let loggedIn = JSON.parse(localStorage.getItem("userInfo"));
-  // //   if (tokenedUser) {
-  // //     console.log("tokenedUser: ", tokenedUser);
-  // //     setUser(tokenedUser.name);
-  // //     //window.location.reload();
-  // //   }
-  // // }, [user, setUser]);
+  //console.log("tokenedUser: ", tokenedUser);
 
-  // useEffect(() => {
-  // }, []);
+  useEffect(() => {
+    //loggedIn = JSON.parse(localStorage.getItem("userInfo"));
+  }, []);
 
   const handleClick = () => {
     setOpen(!open);
@@ -59,6 +54,15 @@ function Navbar() {
           <>
             <li className="nav-logout">
               <a>{tokenedUser.name} </a>
+            </li>
+            <li className="nav-logout">
+              <Link
+                to={`/performance/${tokenedUser._id}`}
+                className="nav-link"
+                onClick={handleClick}
+              >
+                Performance
+              </Link>
             </li>
             <li className="nav-logout" onClick={logout}>
               <a>Logout</a>

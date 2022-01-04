@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+//import { useDispatch, useSelector } from "react-redux";
+//import { loginPending, loginSuccess, loginFail } from "./loginSlice";
 import axios from "axios";
 import "./LoginForm.scss";
 
@@ -12,6 +13,7 @@ export default function LoginForm(props) {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+
     try {
       let { data } = await axios.post("/api/users/signin", { email, password });
       if (data) {

@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import axios from "axios";
 import "./RegisterForm.scss";
+import useAuth from "../../customHooks/useAuth";
 
 export default function LoginForm(props) {
   let navigate = useNavigate();
+  let tokenedUser = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [user, setUser] = useState("");
+  const [redirectToHome, setRedirectToHome] = useState(false);
 
   useEffect(() => {
     //let temp = getItem('userInfo')
     //let temp = localStorage.getItem("key") || "{}";
     //setUser(JSON.parse(temp));
-  });
+  }, [redirectToHome]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -35,14 +38,12 @@ export default function LoginForm(props) {
       });
       if (data) {
         localStorage.setItem("userInfo", JSON.stringify(data));
-        navigate("/", { replace: true });
       }
     }
   };
   return (
     <>
       <div className="full-screen-container">
-        {/* <div className="topSpacer"></div> */}
         <form className="form" onSubmit={submitHandler}>
           <div>
             <h1 className="firstFormh1">Create New Account</h1>
@@ -92,6 +93,7 @@ export default function LoginForm(props) {
             <button className="" type="submit">
               Register
             </button>
+            {redirectToHome ? <Navigate to="/" /> : null}
           </div>
           <div>
             <label />

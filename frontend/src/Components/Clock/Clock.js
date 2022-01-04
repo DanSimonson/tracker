@@ -78,10 +78,10 @@ export default function Clock() {
             name="min"
           />
           <button className="form-field" type="submit">
-            Enter
+            Start
           </button>
           <button className="form-field" onClick={(e) => resetClock(e)}>
-            Reset
+            Stop
           </button>
         </form>
       </div>
