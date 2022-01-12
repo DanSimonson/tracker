@@ -10,13 +10,7 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState([]);
   const [logged, setLogged] = useState({});
-  //let loggedIn;
   let tokenedUser = useAuth();
-  //console.log("tokenedUser: ", tokenedUser);
-
-  useEffect(() => {
-    //loggedIn = JSON.parse(localStorage.getItem("userInfo"));
-  }, []);
 
   const handleClick = () => {
     setOpen(!open);

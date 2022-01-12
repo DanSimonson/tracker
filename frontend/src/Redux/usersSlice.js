@@ -10,6 +10,22 @@ export const getUsers = createAsyncThunk(
     }
   }
 );
+export const getUser = createAsyncThunk(
+  "users/getUser",
+  async (email, password) => {
+    let { data } = await axios.post("/api/users/signin", { email, password });
+    if (data) {
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      return data.users;
+      //window.location.reload();
+      //navigate("/");
+    }
+    //const { data } = await axios.get("/api/users");
+    // if (data) {
+    //   return data.users;
+    // }
+  }
+);
 
 const usersSlice = createSlice({
   name: "user",

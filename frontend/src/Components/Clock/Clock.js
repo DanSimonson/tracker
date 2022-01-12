@@ -6,6 +6,9 @@ export default function Clock() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(1);
   const [start, setStart] = useState(false);
+  const [timerStart, setTimerStart] = useState(0);
+  const [timerEnd, setTimerEnd] = useState(0);
+  const [res, setRes] = useState(3);
   const [displayMessage, setDisplayMessage] = useState(false);
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
@@ -25,12 +28,14 @@ export default function Clock() {
             setSeconds(seconds);
             setMinutes(minutes);
             setDisplayMessage(!displayMessage);
+            setRes(0);
           }
         } else {
           setSeconds(seconds - 1);
         }
       }
     }, 1000);
+    console.log("useEffect res: ", res);
   }, [seconds]);
 
   const handleChange = (e) => {
@@ -38,13 +43,21 @@ export default function Clock() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    setRes(3);
     setMinutes(mins);
+    setTimerStart(mins);
     setSeconds(0);
     setStart(true);
     setMins("");
   };
   const resetClock = (e) => {
     e.preventDefault();
+    if (minutes === 0) {
+      setRes(timerStart);
+    } else {
+      setRes(timerStart - minutes);
+    }
+
     setStart(false);
     setSeconds(1);
     setMinutes(0);
@@ -53,6 +66,7 @@ export default function Clock() {
   return (
     <div className="container">
       <div className="pomodoro">
+        {/*<div>{res}</div>*/}
         <div className="message">
           {displayMessage && <div>Start Timer</div>}
         </div>
