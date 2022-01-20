@@ -2,12 +2,9 @@ import mongoose from "mongoose";
 
 const timerSchema = new mongoose.Schema(
   {
-    timerItems: [
-      {
-        lengthOfTime: { type: Number, required: true },
-        user: { type: String, required: true },
-      },
-    ],
+    time: { type: Number, required: true },
+    name: { type: String, required: true },
+    user_id: { type: String, required: true },
   },
   {
     timestamps: true,
@@ -15,4 +12,4 @@ const timerSchema = new mongoose.Schema(
 );
 
 const Timer = mongoose.model("Timer", timerSchema);
-export default Order;
+export default Timer;
