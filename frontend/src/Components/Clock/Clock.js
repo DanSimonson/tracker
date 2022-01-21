@@ -60,6 +60,7 @@ export default function Clock() {
       setStart(false);
       setSeconds(1);
       setMinutes(0);
+      setDisplayMessage(!displayMessage);
     }
   }, [seconds]);
 
@@ -79,7 +80,7 @@ export default function Clock() {
     e.preventDefault();
 
     /*
-    create new timer in backend. set the timer value, userId and user name.
+    create new timer in backend. set the timer value, user_id and user name.
     */
     if (minutes === 0) {
       if (res === "1") {
@@ -97,9 +98,9 @@ export default function Clock() {
   return (
     <div className="container">
       <div className="pomodoro">
-        {/* <div className="message">
+        <div className="message">
           {displayMessage && <div>Start Timer</div>}
-        </div> */}
+        </div>
         <div className="timer">
           {start ? (
             <div>
