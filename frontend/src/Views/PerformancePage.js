@@ -28,12 +28,21 @@ const PerformancePage = () => {
   let { id } = useParams();
   const { users, status, isAdmin } = useSelector((state) => state.users);
   const data = [
-    { name: "Facebook", users: 2000000000 },
-    { name: "Instagram", users: 1500000000 },
-    { name: "Twiter", users: 1000000000 },
-    { name: "Telegram", users: 500000000 },
+    { date: "12-01-10", value: 20 },
+    { date: "12-01-12", value: 10 },
+    { date: "12-01-13", value: 70 },
+    { date: "12-01-14", value: 66 },
+    { date: "12-01-15", value: 124 },
   ];
   const dataArea = [];
+  const barData = [];
+  //let dataRes = [];
+  let dataResult = [];
+  let dataResultOne = [];
+  let dataResultTwo = [];
+  let dataResultThree = [];
+  let dataResultFour = [];
+  let dataResultFive = [];
 
   useEffect(() => {
     dispatch(getUsers());
@@ -46,7 +55,39 @@ const PerformancePage = () => {
     try {
       let { data } = await axios.get("/api/timer/");
       const result = data.timers.filter((time) => time.user_id === user._id);
-      console.log("timers: ", result);
+      for (let i = 0; i < result.length; i++) {
+        barData.push({
+          date: result[i].updatedAt.substr(0, 10),
+          value: result[i].time,
+        });
+      }
+      //find the duplicates
+      console.log("barData: ", barData);
+      let indx;
+      for (let i = 0; i < barData.length; i++) {
+        indx = i + 1;
+        if (indx <= barData.length - 1) {
+          if (dataResult.length === 0) {
+            dataResult = barData.filter((e) => e.date === barData[i].date);
+            console.log("dataResult: ", dataResult);
+          } else if (i === dataResult.length) {
+            dataResultOne = barData.filter((e) => e.date === barData[i].date);
+            console.log("dataResultOne: ", dataResultOne);
+          } else if (i === dataResultOne.length) {
+            dataResultTwo = barData.filter((e) => e.date === barData[i].date);
+            console.log("dataResultTwo: ", dataResultTwo);
+          } else if (i === dataResultTwo.length) {
+            dataResultThree = barData.filter((e) => e.date === barData[i].date);
+            console.log("dataResultThree: ", dataResultThree);
+          } else if (i === dataResultThree.length) {
+            dataResultFour = barData.filter((e) => e.date === barData[i].date);
+            console.log("dataResultFour: ", dataResultFour);
+          } else if (i === dataResultFour.length) {
+            dataResultFive = barData.filter((e) => e.date === barData[i].date);
+            console.log("dataResultFive: ", dataResultFive);
+          }
+        }
+      }
     } catch (error) {
       console.log("error: ", error);
     }
@@ -70,7 +111,7 @@ const PerformancePage = () => {
         {foundUser ? `performance page for ${foundUser.name}` : null}
       </h2>
       <div className="performanceApp">
-        <PieChart width={400} height={400}>
+        {/* <PieChart width={400} height={400}>
           <Pie
             dataKey="users"
             isAnimationActive={false}
@@ -82,7 +123,7 @@ const PerformancePage = () => {
             label
           />
           <Tooltip />
-        </PieChart>
+        </PieChart> */}
         <BarChart
           width={500}
           height={300}
@@ -96,7 +137,7 @@ const PerformancePage = () => {
           barSize={20}
         >
           <XAxis
-            dataKey="name"
+            dataKey="date"
             scale="point"
             padding={{ left: 10, right: 10 }}
           />
@@ -104,7 +145,7 @@ const PerformancePage = () => {
           <Tooltip />
           <Legend />
           <CartesianGrid strokeDasharray="3 3" />
-          <Bar dataKey="users" fill="#8884d8" background={{ fill: "#eee" }} />
+          <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
         </BarChart>
       </div>
       <ResponsiveContainer width="100%" height={400}>
@@ -155,3 +196,79 @@ function CustomTooltip({ active, payload, label }) {
 }
 
 export default PerformancePage;
+
+/**
+ // const lookup = barData.reduce((a, e) => {
+      //   a[e.date] = ++a[e.date] || 0;
+      //   return a;
+      // }, {});
+      //console.log("lookup: ", lookup);
+      //get the keys
+      //const keys = Object.keys(lookup);
+      //place duplicates in arrays
+      //let length = keys.length;
+      //let tlngth = keys.length - keys.length;
+      //console.log("tlngth: ", tlngth);
+      // let tempLngth = [];
+      // let tempIndex = [];
+      // for (let k = 0; k < keys.length; k++) {
+      //   tempIndex.push(k);
+      //   tempLngth = [...tempLngth, k];
+      //   //console.log("tempLngth: ", tempLngth);
+      //   //console.log("tempIndex: ", tempIndex);
+      // }
+      //let l = 1;
+      //let myNum = eval(`${keys.length} - l`);
+      //console.log("myNum: ", myNum);
+      //console.log("length: ", length);
+
+      // for (let i = 0; i < barData.length; i++) {
+      //   //console.log("current value if i is: ", i);
+      //   for (let j = 0; j < keys.length; j++) {
+      //     if (barData[i].date === keys[j]) {
+      //       //console.log("barData[i].date === keys[j]: ", barData[i]);
+      //       let tempObj = barData[i];
+      //       if (dataRes.length === 0) {
+      //         dataRes = [...dataRes, tempObj];
+      //       } else {
+      //         if (j === tempLngth[0]) {
+      //           dataRes = [...dataRes, tempObj];
+      //         } else if (j === tempLngth[1]) {
+      //           dataResTwo = [...dataResTwo, tempObj];
+      //         }
+      //       }
+      //       console.log("dataRes: ", dataRes);
+      //       console.log("dataResTwo: ", dataResTwo);
+      //     }
+      //   }
+      // }
+
+      // console.log(
+      //   "answer: ",
+      //   barData.filter((e) => e.date === barData[4].date)
+      // );
+
+      // console.log(
+      //   "filtered barData: ",
+      //   barData.filter((e) => e.date === "2022-01-20")
+      // );
+      //let dup = barData.filter((e) => e.date === keys[0]);
+      //console.log("dup: ", dup);
+      //let count = 0;
+      //console.log("lookup: ", lookup);
+      // console.log("lookup: ", lookup);
+      // for (let look in lookup) {
+      //   console.log("look: ", look);
+      //   console.log("lookup: ", lookup[look]);
+      // }
+      //let keys = Object.keys(lookup);
+      //console.log("keys: ", keys);
+      //let values = Object.values(lookup);
+      //console.log("values: ", values);
+      //let matrix = Object.entries(lookup);
+      //console.log("matrix: ", matrix);
+      //console.log("keys.length: ", keys.length);
+      //eval(`${keys.length} - l`)
+      //let dup = [];
+      //let tempVal;
+ */
