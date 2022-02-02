@@ -58,18 +58,22 @@ const useData = () => {
             tempData = dataResultTwo = barData.filter(
               (e) => e.date === barData[i].date
             );
+            setChart(tempData);
           } else if (i === dataResultTwo.length) {
             tempData = dataResultThree = barData.filter(
               (e) => e.date === barData[i].date
             );
+            setChart(tempData);
           } else if (i === dataResultThree.length) {
             tempData = dataResultFour = barData.filter(
               (e) => e.date === barData[i].date
             );
+            setChart(tempData);
           } else if (i === dataResultFour.length) {
             tempData = dataResultFive = barData.filter(
               (e) => e.date === barData[i].date
             );
+            setChart(tempData);
           }
         }
       }

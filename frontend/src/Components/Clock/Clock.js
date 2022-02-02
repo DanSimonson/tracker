@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Clock.scss";
 
 export default function Clock() {
-  let dRes = useData();
-  console.log("dRes: ", dRes);
+  const { chart } = useData();
+  console.log("chart: ", chart);
   const [calc, setCalc] = useState(false);
   const [mins, setMins] = useState("");
   const [minutes, setMinutes] = useState(0);
