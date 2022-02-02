@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import useAuth from "../../customHooks/useAuth";
+import useData from "../../customHooks/useData";
 import { add } from "../../Redux/timerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import "./Clock.scss";
 
 export default function Clock() {
+  let dRes = useData();
+  console.log("dRes: ", dRes);
   const [calc, setCalc] = useState(false);
   const [mins, setMins] = useState("");
   const [minutes, setMinutes] = useState(0);

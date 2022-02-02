@@ -21,18 +21,26 @@ import {
 import { format, parseISO, subDays } from "date-fns";
 
 const PerformancePage = () => {
+  //const [element, setElement] = useState({ date: "", value: "" });
+  //let elem = {};
+  const [barD, setBarD] = useState();
+  const [chartD, setChart] = useState([]);
   const [foundUser, setFoundUser] = useState([]);
   let tokenedUser = useAuth();
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let { id } = useParams();
   const { users, status, isAdmin } = useSelector((state) => state.users);
-  const data = [
+  let data = [
     { date: "12-01-10", value: 20 },
     { date: "12-01-12", value: 10 },
     { date: "12-01-13", value: 70 },
     { date: "12-01-14", value: 66 },
     { date: "12-01-15", value: 124 },
+  ];
+  let d = [
+    { date: "2022-01-20", value: 100 },
+    { date: "2022-01-28", value: 190 },
   ];
   const dataArea = [];
   const barData = [];
@@ -43,11 +51,12 @@ const PerformancePage = () => {
   let dataResultThree = [];
   let dataResultFour = [];
   let dataResultFive = [];
+  let tempArr = [];
 
   useEffect(() => {
     dispatch(getUsers());
     findUser();
-    findTimes();
+    //findTimes();
   }, []);
 
   const findTimes = async () => {
@@ -62,35 +71,49 @@ const PerformancePage = () => {
         });
       }
       //find the duplicates
-      console.log("barData: ", barData);
+      //console.log("barData: ", barData);
+
       let indx;
       for (let i = 0; i < barData.length; i++) {
         indx = i + 1;
         if (indx <= barData.length - 1) {
           if (dataResult.length === 0) {
             dataResult = barData.filter((e) => e.date === barData[i].date);
-            console.log("dataResult: ", dataResult);
+            calcChartData(dataResult, i);
           } else if (i === dataResult.length) {
             dataResultOne = barData.filter((e) => e.date === barData[i].date);
-            console.log("dataResultOne: ", dataResultOne);
+            calcChartData(dataResultOne, i);
           } else if (i === dataResultOne.length) {
             dataResultTwo = barData.filter((e) => e.date === barData[i].date);
-            console.log("dataResultTwo: ", dataResultTwo);
           } else if (i === dataResultTwo.length) {
             dataResultThree = barData.filter((e) => e.date === barData[i].date);
-            console.log("dataResultThree: ", dataResultThree);
           } else if (i === dataResultThree.length) {
             dataResultFour = barData.filter((e) => e.date === barData[i].date);
-            console.log("dataResultFour: ", dataResultFour);
           } else if (i === dataResultFour.length) {
             dataResultFive = barData.filter((e) => e.date === barData[i].date);
-            console.log("dataResultFive: ", dataResultFive);
           }
         }
       }
     } catch (error) {
       console.log("error: ", error);
     }
+  };
+  const calcChartData = (dataArray, index) => {
+    let totalValue = dataArray.reduce((acc, item) => acc + item.value, 0);
+    let newElement = {
+      date: dataArray[0].date,
+      value: totalValue,
+    };
+    tempArr.push(newElement);
+    setChart(tempArr);
+    //data = tempArr;
+    displayChart();
+  };
+  const displayChart = () => {
+    //console.log("chartD: ", chartD);
+    // if (chartD.length > 1) {
+    //   setBarD({ test: "t" });
+    // }
   };
 
   const findUser = () => {
@@ -104,14 +127,20 @@ const PerformancePage = () => {
       value: 1 + Math.random(),
     });
   }
-
+  /* chart.map((ch) => (
+          <div key={ch.date} style={{ color: "white" }}>
+            {ch.date}
+          </div>*/
   return (
-    <div style={{ textAlign: "center" }}>
-      <h2 style={{ marginBottom: "1rem", color: "#fff" }}>
-        {foundUser ? `performance page for ${foundUser.name}` : null}
-      </h2>
-      <div className="performanceApp">
-        {/* <PieChart width={400} height={400}>
+    <>
+      <button onClick={findTimes}>chart is true</button>
+
+      <div style={{ textAlign: "center" }}>
+        <h2 style={{ marginBottom: "1rem", color: "#fff" }}>
+          {foundUser ? `performance page for ${foundUser.name}` : null}
+        </h2>
+        <div className="performanceApp">
+          {/* <PieChart width={400} height={400}>
           <Pie
             dataKey="users"
             isAnimationActive={false}
@@ -124,63 +153,65 @@ const PerformancePage = () => {
           />
           <Tooltip />
         </PieChart> */}
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 80,
-            bottom: 5,
-          }}
-          barSize={20}
-        >
-          <XAxis
-            dataKey="date"
-            scale="point"
-            padding={{ left: 10, right: 10 }}
-          />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
-        </BarChart>
-      </div>
-      <ResponsiveContainer width="100%" height={400}>
-        <AreaChart data={dataArea} stroke="#2451b7" fill="url(#color)">
-          <defs>
-            <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} />
-              <stop offset="75%" stopColor="#2451B7" stopOpacity={0.05} />
-            </linearGradient>
-          </defs>
-          <Area dataKey="value" />
-          <XAxis
-            dataKey="date"
-            axisLine={false}
-            tickLine={false}
-            tickFormatter={(str) => {
-              const date = parseISO(str);
-              if (date.getDate() % 7 === 0) {
-                return format(date, "MMM, d");
-              }
-              return "";
+          <BarChart
+            width={500}
+            height={300}
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 80,
+              bottom: 5,
             }}
-          />
-          <YAxis
-            datakey="value"
-            axisLine={false}
-            tickLine={false}
-            tickCount={8}
-            tickFormatter={(number) => `${number.toFixed(2)}`}
-          />
-          <Tooltip content={<CustomTooltip />} />
-          <CartesianGrid opacity={0.1} vertical={false} />
-        </AreaChart>
-      </ResponsiveContainer>
-    </div>
+            barSize={20}
+          >
+            <XAxis
+              dataKey="date"
+              scale="point"
+              padding={{ left: 10, right: 10 }}
+            />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
+          </BarChart>
+        </div>
+        )
+        <ResponsiveContainer width="100%" height={400}>
+          <AreaChart data={dataArea} stroke="#2451b7" fill="url(#color)">
+            <defs>
+              <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#2451B7" stopOpacity={0.4} />
+                <stop offset="75%" stopColor="#2451B7" stopOpacity={0.05} />
+              </linearGradient>
+            </defs>
+            <Area dataKey="value" />
+            <XAxis
+              dataKey="date"
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={(str) => {
+                const date = parseISO(str);
+                if (date.getDate() % 7 === 0) {
+                  return format(date, "MMM, d");
+                }
+                return "";
+              }}
+            />
+            <YAxis
+              datakey="value"
+              axisLine={false}
+              tickLine={false}
+              tickCount={8}
+              tickFormatter={(number) => `${number.toFixed(2)}`}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <CartesianGrid opacity={0.1} vertical={false} />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    </>
   );
 };
 function CustomTooltip({ active, payload, label }) {
