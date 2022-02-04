@@ -22,7 +22,7 @@ export const getUser = createAsyncThunk(
 );
 
 const usersSlice = createSlice({
-  name: "user",
+  name: "users",
   initialState: {
     users: [],
     status: null,
@@ -40,4 +40,7 @@ const usersSlice = createSlice({
     },
   },
 });
+
+export const selectUsers = ({ users }) => users;
+
 export default usersSlice.reducer;

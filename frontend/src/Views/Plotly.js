@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 import { useParams } from "react-router-dom";
-import { getUsers } from "../Redux/usersSlice";
+import { getUsers, selectUsers } from "../Redux/usersSlice";
 import useData from "../customHooks/useData";
 import { useSelector, useDispatch } from "react-redux";
 
 function Plotly() {
-  const [foundUser, setFoundUser] = useState([]);
+  const user = JSON.parse(localStorage.getItem("userInfo"));
   let dispatch = useDispatch();
-  //const { users, status, isAdmin } = useSelector((state) => state.users);
-  //let users = dispatch(getUsers());
-  //console.log("users: ", users);
+  let chartUsers = useSelector(selectUsers);
+  let { id } = useParams();
   let newData = useData();
   let newDates = [];
   let newValues = [];
-  let { id } = useParams();
+
   const sample = [
     {
       category: "A",
@@ -24,10 +23,9 @@ function Plotly() {
   ];
   const [data, setData] = useState([]);
 
-  //   useEffect(() => {
-  //     dispatch(getUsers());
-  //     findUser();
-  //   }, []);
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
 
   function handleClick(e) {
     for (let i = 0; i < newData.chart.length; i++) {
@@ -41,22 +39,11 @@ function Plotly() {
     });
   }
 
-  //   const findUser = () => {
-  //     let user = users.filter((user) => user._id === id);
-  //     setFoundUser(user[0]);
-  //   };
-
   return (
     <div>
-      {/* <div style={{ textAlign: "center" }}>
-        <h2 style={{ marginBottom: "1rem", color: "#fff" }}>
-          {foundUser ? `performance page for ${foundUser.name}` : null}
-        </h2>
-      </div> */}
       <div>
         <button onClick={handleClick} id="A">
-          {/* {foundUser ? `performance page for ${foundUser.name}` : null} */}
-          Get Performance
+          {user ? `performance page for ${user.name}` : null}
         </button>
       </div>
       <Plot
