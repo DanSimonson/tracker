@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getUsers } from "../Redux/usersSlice";
 import { useSelector, useDispatch } from "react-redux";
 import useAuth from "../customHooks/useAuth";
+import useData from "../customHooks/useData";
 import axios from "axios";
 import {
   ResponsiveContainer,
@@ -21,10 +22,9 @@ import {
 import { format, parseISO, subDays } from "date-fns";
 
 const PerformancePage = () => {
-  //const [element, setElement] = useState({ date: "", value: "" });
-  //let elem = {};
-  const [barD, setBarD] = useState();
-  const [chartD, setChart] = useState([]);
+  const { chart } = useData();
+  console.log("chart: ", chart);
+  const [ready, setReady] = useState(false);
   const [foundUser, setFoundUser] = useState([]);
   let tokenedUser = useAuth();
   let navigate = useNavigate();
@@ -42,6 +42,7 @@ const PerformancePage = () => {
     { date: "2022-01-20", value: 100 },
     { date: "2022-01-28", value: 190 },
   ];
+  let dChart = [];
   const dataArea = [];
   const barData = [];
   //let dataRes = [];
@@ -52,68 +53,26 @@ const PerformancePage = () => {
   let dataResultFour = [];
   let dataResultFive = [];
   let tempArr = [];
+  let chData = [];
 
   useEffect(() => {
     dispatch(getUsers());
     findUser();
-    //findTimes();
   }, []);
 
-  const findTimes = async () => {
-    const user = JSON.parse(localStorage.getItem("userInfo"));
-    try {
-      let { data } = await axios.get("/api/timer/");
-      const result = data.timers.filter((time) => time.user_id === user._id);
-      for (let i = 0; i < result.length; i++) {
-        barData.push({
-          date: result[i].updatedAt.substr(0, 10),
-          value: result[i].time,
-        });
-      }
-      //find the duplicates
-      //console.log("barData: ", barData);
-
-      let indx;
-      for (let i = 0; i < barData.length; i++) {
-        indx = i + 1;
-        if (indx <= barData.length - 1) {
-          if (dataResult.length === 0) {
-            dataResult = barData.filter((e) => e.date === barData[i].date);
-            calcChartData(dataResult, i);
-          } else if (i === dataResult.length) {
-            dataResultOne = barData.filter((e) => e.date === barData[i].date);
-            calcChartData(dataResultOne, i);
-          } else if (i === dataResultOne.length) {
-            dataResultTwo = barData.filter((e) => e.date === barData[i].date);
-          } else if (i === dataResultTwo.length) {
-            dataResultThree = barData.filter((e) => e.date === barData[i].date);
-          } else if (i === dataResultThree.length) {
-            dataResultFour = barData.filter((e) => e.date === barData[i].date);
-          } else if (i === dataResultFour.length) {
-            dataResultFive = barData.filter((e) => e.date === barData[i].date);
-          }
-        }
-      }
-    } catch (error) {
-      console.log("error: ", error);
+  const loadChart = () => {
+    for (let i = 0; i < chart.length; i++) {
+      chData.push({
+        date: chart[i].date,
+        value: chart[i].value,
+      });
     }
-  };
-  const calcChartData = (dataArray, index) => {
-    let totalValue = dataArray.reduce((acc, item) => acc + item.value, 0);
-    let newElement = {
-      date: dataArray[0].date,
-      value: totalValue,
-    };
-    tempArr.push(newElement);
-    setChart(tempArr);
-    //data = tempArr;
-    displayChart();
-  };
-  const displayChart = () => {
-    //console.log("chartD: ", chartD);
-    // if (chartD.length > 1) {
-    //   setBarD({ test: "t" });
-    // }
+    console.log("chData: ", chData);
+    console.log("typeof chData[0].date", typeof chData[0].date);
+    console.log("typeof chData[0].value", typeof chData[0].value);
+
+    setReady(true);
+    return chData;
   };
 
   const findUser = () => {
@@ -127,13 +86,10 @@ const PerformancePage = () => {
       value: 1 + Math.random(),
     });
   }
-  /* chart.map((ch) => (
-          <div key={ch.date} style={{ color: "white" }}>
-            {ch.date}
-          </div>*/
+
   return (
     <>
-      <button onClick={findTimes}>chart is true</button>
+      <button onClick={loadChart}>chart is true</button>
 
       <div style={{ textAlign: "center" }}>
         <h2 style={{ marginBottom: "1rem", color: "#fff" }}>
@@ -153,31 +109,37 @@ const PerformancePage = () => {
           />
           <Tooltip />
         </PieChart> */}
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 80,
-              bottom: 5,
-            }}
-            barSize={20}
-          >
-            <XAxis
-              dataKey="date"
-              scale="point"
-              padding={{ left: 10, right: 10 }}
-            />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <CartesianGrid strokeDasharray="3 3" />
-            <Bar dataKey="value" fill="#8884d8" background={{ fill: "#eee" }} />
-          </BarChart>
+          {ready === true ? (
+            <BarChart
+              width={500}
+              height={300}
+              data={chData}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 80,
+                bottom: 5,
+              }}
+              barSize={20}
+            >
+              <XAxis
+                dataKey="date"
+                scale="point"
+                padding={{ left: 10, right: 10 }}
+              />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <CartesianGrid strokeDasharray="3 3" />
+              <Bar
+                dataKey="value"
+                fill="#8884d8"
+                background={{ fill: "#eee" }}
+              />
+            </BarChart>
+          ) : null}
         </div>
-        )
+
         <ResponsiveContainer width="100%" height={400}>
           <AreaChart data={dataArea} stroke="#2451b7" fill="url(#color)">
             <defs>

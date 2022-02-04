@@ -16,6 +16,7 @@ import {
 } from "recharts";
 
 const useData = () => {
+  const [exportChart, setExportChart] = useState([]);
   const [chart, setChart] = useState([]);
   const barData = [];
   let dataResult = [];
@@ -50,30 +51,36 @@ const useData = () => {
             dataResult = barData.filter((e) => e.date === barData[i].date);
             tempData = calcChartData(dataResult, i);
             setChart(tempData);
+            //setEnd(tempData.length);
           } else if (i === dataResult.length) {
             dataResultOne = barData.filter((e) => e.date === barData[i].date);
             tempData = calcChartData(dataResultOne, i);
             setChart(tempData);
+            //setEnd(tempData.length);
           } else if (i === dataResultOne.length) {
             tempData = dataResultTwo = barData.filter(
               (e) => e.date === barData[i].date
             );
             setChart(tempData);
+            //setEnd(tempData.length);
           } else if (i === dataResultTwo.length) {
             tempData = dataResultThree = barData.filter(
               (e) => e.date === barData[i].date
             );
             setChart(tempData);
+            //setEnd(tempData.length);
           } else if (i === dataResultThree.length) {
             tempData = dataResultFour = barData.filter(
               (e) => e.date === barData[i].date
             );
             setChart(tempData);
+            //setEnd(tempData.length);
           } else if (i === dataResultFour.length) {
             tempData = dataResultFive = barData.filter(
               (e) => e.date === barData[i].date
             );
             setChart(tempData);
+            //setEnd(tempData.length);
           }
         }
       }
@@ -90,6 +97,7 @@ const useData = () => {
     tempArr.push(newElement);
     return tempArr;
   };
+
   return { chart };
 };
 

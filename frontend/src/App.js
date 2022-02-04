@@ -7,6 +7,7 @@ import Home from "./Views/Home";
 import LoginPage from "./Views/LoginPage";
 import RegisterPage from "./Views/RegisterPage";
 import PerformancePage from "./Views/PerformancePage";
+import Plotly from "./Views/Plotly";
 import Navbar from "./Components/Navbar/Navbar";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
+          <Route path="/plotly/:id" element={<Plotly />} />
           <Route path="/performance/:id" element={<PerformancePage />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />

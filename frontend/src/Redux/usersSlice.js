@@ -17,13 +17,7 @@ export const getUser = createAsyncThunk(
     if (data) {
       localStorage.setItem("userInfo", JSON.stringify(data));
       return data.users;
-      //window.location.reload();
-      //navigate("/");
     }
-    //const { data } = await axios.get("/api/users");
-    // if (data) {
-    //   return data.users;
-    // }
   }
 );
 

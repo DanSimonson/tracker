@@ -51,11 +51,11 @@ function Navbar() {
             </li>
             <li className="nav-logout">
               <Link
-                to={`/performance/${tokenedUser._id}`}
+                to={`/plotly/${tokenedUser._id}`}
                 className="nav-link"
                 onClick={handleClick}
               >
-                Performance
+                PlotPerformance
               </Link>
             </li>
             <li className="nav-logout" onClick={logout}>
