@@ -46,42 +46,47 @@ const useData = () => {
 
       for (let i = 0; i < barData.length; i++) {
         indx = i + 1;
-        if (indx <= barData.length - 1) {
-          if (dataResult.length === 0) {
-            dataResult = barData.filter((e) => e.date === barData[i].date);
-            tempData = calcChartData(dataResult, i);
-            setChart(tempData);
-            //setEnd(tempData.length);
-          } else if (i === dataResult.length) {
-            dataResultOne = barData.filter((e) => e.date === barData[i].date);
-            tempData = calcChartData(dataResultOne, i);
-            setChart(tempData);
-            //setEnd(tempData.length);
-          } else if (i === dataResultOne.length) {
-            tempData = dataResultTwo = barData.filter(
-              (e) => e.date === barData[i].date
-            );
-            setChart(tempData);
-            //setEnd(tempData.length);
-          } else if (i === dataResultTwo.length) {
-            tempData = dataResultThree = barData.filter(
-              (e) => e.date === barData[i].date
-            );
-            setChart(tempData);
-            //setEnd(tempData.length);
-          } else if (i === dataResultThree.length) {
-            tempData = dataResultFour = barData.filter(
-              (e) => e.date === barData[i].date
-            );
-            setChart(tempData);
-            //setEnd(tempData.length);
-          } else if (i === dataResultFour.length) {
-            tempData = dataResultFive = barData.filter(
-              (e) => e.date === barData[i].date
-            );
-            setChart(tempData);
-            //setEnd(tempData.length);
-          }
+
+        if (dataResult.length === 0) {
+          dataResult = barData.filter((e) => e.date === barData[i].date);
+          tempData = calcChartData(dataResult, i);
+          setChart(tempData);
+        } else if (i === dataResult.length) {
+          dataResultOne = barData.filter((e) => e.date === barData[i].date);
+          tempData = calcChartData(dataResultOne, i);
+          setChart(tempData);
+        } else if (i === dataResult.length + dataResultOne.length) {
+          dataResultTwo = barData.filter((e) => e.date === barData[i].date);
+          tempData = calcChartData(dataResultTwo, i);
+          setChart(tempData);
+        } else if (
+          i ===
+          dataResult.length + dataResultOne.length + dataResultTwo.length
+        ) {
+          dataResultThree = barData.filter((e) => e.date === barData[i].date);
+          tempData = calcChartData(dataResultThree, i);
+          setChart(tempData);
+        } else if (
+          i ===
+          dataResult.length +
+            dataResultOne.length +
+            dataResultTwo.length +
+            dataResultThree.length
+        ) {
+          dataResultFour = barData.filter((e) => e.date === barData[i].date);
+          tempData = calcChartData(dataResultFour, i);
+          setChart(tempData);
+        } else if (
+          i ===
+          dataResult.length +
+            dataResultOne.length +
+            dataResultTwo.length +
+            dataResultThree.length +
+            dataResultFour.length
+        ) {
+          dataResultFive = barData.filter((e) => e.date === barData[i].date);
+          tempData = calcChartData(dataResultFive, i);
+          setChart(tempData);
         }
       }
     } catch (error) {
