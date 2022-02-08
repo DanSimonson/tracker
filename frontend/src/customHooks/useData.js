@@ -25,6 +25,7 @@ const useData = () => {
   let dataResultThree = [];
   let dataResultFour = [];
   let dataResultFive = [];
+  let dataResultSix = [];
   let tempArr = [];
   let tempData = [];
   let indx;
@@ -86,6 +87,18 @@ const useData = () => {
         ) {
           dataResultFive = barData.filter((e) => e.date === barData[i].date);
           tempData = calcChartData(dataResultFive, i);
+          setChart(tempData);
+        } else if (
+          i ===
+          dataResult.length +
+            dataResultOne.length +
+            dataResultTwo.length +
+            dataResultThree.length +
+            dataResultFour.length +
+            dataResultFive.length
+        ) {
+          dataResultSix = barData.filter((e) => e.date === barData[i].date);
+          tempData = calcChartData(dataResultSix, i);
           setChart(tempData);
         }
       }
