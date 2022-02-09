@@ -50,7 +50,11 @@ export default function Clock() {
       let name = tokenedUser.name;
 
       try {
-        dispatch(createTimer, { time, user_id, name });
+        let timersResult = await axios.post("/api/timer/", {
+          time,
+          user_id,
+          name,
+        });
       } catch (error) {
         console.log("error: ", error);
       }
