@@ -4,8 +4,8 @@ import useAuth from "../../customHooks/useAuth";
 import useData from "../../customHooks/useData";
 import { add } from "../../Redux/timerSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { createTimer } from "../../Redux/timerSlice";
 import "./Clock.scss";
-
 export default function Clock() {
   const [calc, setCalc] = useState(false);
   const [mins, setMins] = useState("");
@@ -48,12 +48,9 @@ export default function Clock() {
       let time = parseFloat(res);
       let user_id = tokenedUser._id;
       let name = tokenedUser.name;
+
       try {
-        let temp = await axios.post("/api/timer/", {
-          time,
-          user_id,
-          name,
-        });
+        dispatch(createTimer, { time, user_id, name });
       } catch (error) {
         console.log("error: ", error);
       }

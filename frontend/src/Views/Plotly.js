@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getUsers, selectUsers } from "../Redux/usersSlice";
 import useData from "../customHooks/useData";
 import { useSelector, useDispatch } from "react-redux";
+import { createTimer } from "../Redux/timerSlice";
 
 function Plotly() {
   const user = JSON.parse(localStorage.getItem("userInfo"));
