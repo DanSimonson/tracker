@@ -16,8 +16,8 @@ export const createTimer = createAsyncThunk(
 export const timerSlice = createSlice({
   name: "timer",
   initialState: {
-    timers = [],
-    status = null
+    timers: [],
+    status: null,
   },
   extraReducers: {
     [createTimer.pending]: (state, action) => {
