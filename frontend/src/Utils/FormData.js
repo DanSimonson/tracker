@@ -11,8 +11,17 @@ const FormData = async (newData, data, date) => {
     }
   });
   let tempArr = duplicate.slice(-1);
-  if (tempArr.includes("undefined")) {
-    //update with newData props
+  if (tempArr.includes(undefined)) {
+    try {
+      const timersResult = await axios.post("/api/timer/", {
+        time: newData.time,
+        user_id: newData.user_id,
+        name: newData.name,
+      });
+      return timersResult;
+    } catch (error) {
+      console.log("error: ", error.message);
+    }
   } else {
     let newTime = tempArr[0].time + newData.time;
     try {

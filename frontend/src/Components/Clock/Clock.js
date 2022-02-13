@@ -53,22 +53,8 @@ export default function Clock() {
       let name = tokenedUser.name;
 
       try {
-        //console.log("data.timers: ", data.timers);
         let { data } = await axios.get("/api/timer/");
-        // let timersResult = await axios.post("/api/timer/", {
-        //   time,
-        //   user_id,
-        //   name,
-        // });
-
-        //console.log("timersResult.data.timer: ", timersResult.data.timer);
-        //console.log("newData: ", newData);
-        //result[i].updatedAt.substr(0, 10),
         let date = new Date().toISOString().substr(0, 10);
-        //date = date.substr(0, 10)
-        //console.log("date: ", date);
-        //console.log("data.timer: ", data.timers);
-
         FormData(
           { time: time, user_id: user_id, name: name },
           data.timers,
