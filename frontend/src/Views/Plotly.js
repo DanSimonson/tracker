@@ -5,6 +5,8 @@ import { getUsers, selectUsers } from "../Redux/usersSlice";
 import useData from "../customHooks/useData";
 import { useSelector, useDispatch } from "react-redux";
 import { createTimer } from "../Redux/timerSlice";
+import expressAsyncHandler from "express-async-handler";
+import axios from "axios";
 
 function Plotly() {
   const user = JSON.parse(localStorage.getItem("userInfo"));
@@ -29,6 +31,7 @@ function Plotly() {
   }, []);
 
   function handleClick(e) {
+    //console.log("newData: ", newData);
     for (let i = 0; i < newData.chart.length; i++) {
       newDates.push(newData.chart[i].date);
       newValues.push(newData.chart[i].value);

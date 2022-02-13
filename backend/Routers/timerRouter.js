@@ -25,5 +25,20 @@ timerRouter.post(
     res.send({ message: "Timer Created", timer: createdTimer });
   })
 );
+timerRouter.delete(
+  "/:id",
+  expressAsyncHandler(async (req, res) => {
+    console.log("req.params.id: ", req.params.id);
+    const timer = await Timer.findById(req.params.id);
+    console.log("timer---------: ", timer);
+    if (timer) {
+      const deleteTimer = await timer.remove();
+      console.log("deleteTimer-------: ", deleteTimer);
+      res.send({ message: "Timer Deleted", timer: deleteTimer });
+    } else {
+      res.status(404).send({ message: "Timer Not Found" });
+    }
+  })
+);
 
 export default timerRouter;
