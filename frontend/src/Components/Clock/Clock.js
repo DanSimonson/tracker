@@ -6,6 +6,8 @@ import { add } from "../../Redux/timerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { createTimer } from "../../Redux/timerSlice";
 import "./Clock.scss";
+import { format } from "date-fns";
+import FormData from "../../Utils/FormData";
 export default function Clock() {
   const [calc, setCalc] = useState(false);
   const [mins, setMins] = useState("");
@@ -20,6 +22,7 @@ export default function Clock() {
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
   let tokenedUser = useAuth();
   const dispatch = useDispatch();
+  let newData = useData();
 
   useEffect(async () => {
     let interval = setInterval(() => {
@@ -50,11 +53,27 @@ export default function Clock() {
       let name = tokenedUser.name;
 
       try {
-        let timersResult = await axios.post("/api/timer/", {
-          time,
-          user_id,
-          name,
-        });
+        //console.log("data.timers: ", data.timers);
+        let { data } = await axios.get("/api/timer/");
+        // let timersResult = await axios.post("/api/timer/", {
+        //   time,
+        //   user_id,
+        //   name,
+        // });
+
+        //console.log("timersResult.data.timer: ", timersResult.data.timer);
+        //console.log("newData: ", newData);
+        //result[i].updatedAt.substr(0, 10),
+        let date = new Date().toISOString().substr(0, 10);
+        //date = date.substr(0, 10)
+        //console.log("date: ", date);
+        //console.log("data.timer: ", data.timers);
+
+        FormData(
+          { time: time, user_id: user_id, name: name },
+          data.timers,
+          date
+        );
       } catch (error) {
         console.log("error: ", error);
       }

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  PieChart,
-  Pie,
-  Tooltip,
-  BarChart,
-  XAxis,
-  YAxis,
-  Legend,
-  CartesianGrid,
-  Bar,
-} from "recharts";
+// import {
+//   ResponsiveContainer,
+//   AreaChart,
+//   Area,
+//   PieChart,
+//   Pie,
+//   Tooltip,
+//   BarChart,
+//   XAxis,
+//   YAxis,
+//   Legend,
+//   CartesianGrid,
+//   Bar,
+// } from "recharts";
 
 const useData = () => {
   const [exportChart, setExportChart] = useState([]);
@@ -37,6 +37,7 @@ const useData = () => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
     try {
       let { data } = await axios.get("/api/timer/");
+      //console.log("data: ", data);
       const result = data.timers.filter((time) => time.user_id === user._id);
       for (let i = 0; i < result.length; i++) {
         barData.push({
@@ -115,8 +116,9 @@ const useData = () => {
     tempArr.push(newElement);
     return tempArr;
   };
-
-  return { chart };
+  //console.log("chart: ", chart);
+  //return { chart };
+  //return true
 };
 
 export default useData;
