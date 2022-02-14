@@ -33,6 +33,7 @@ const FormData = async (newData, data, date) => {
             user_id: newData.user_id,
             name: newData.name,
           });
+          return timersResult;
         } catch (error) {
           console.log("error: ", error.message);
         }
@@ -41,7 +42,7 @@ const FormData = async (newData, data, date) => {
       console.log("error: ", error.message);
     }
   }
-  return <div>formdata</div>;
+  //return <div>formdata</div>;
 };
 
 export default FormData;

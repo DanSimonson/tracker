@@ -6,12 +6,13 @@ import useData from "../customHooks/useData";
 import { useSelector, useDispatch } from "react-redux";
 import { createTimer } from "../Redux/timerSlice";
 import expressAsyncHandler from "express-async-handler";
+import FormData from "../Utils/FormData";
 import axios from "axios";
 
 function Plotly() {
+  const [chart, setChart] = useState([]);
   const user = JSON.parse(localStorage.getItem("userInfo"));
   let dispatch = useDispatch();
-  let chartUsers = useSelector(selectUsers);
   let { id } = useParams();
   let newData = useData();
   let newDates = [];
@@ -28,14 +29,28 @@ function Plotly() {
 
   useEffect(() => {
     dispatch(getUsers());
+    function getTimers() {
+      axios
+        .get("/api/timer/")
+        .then((res) => {
+          console.log("res: ", res);
+          setChart(res.data.timers);
+        })
+        .catch((error) => {
+          console.log("error: ", error.message);
+        });
+    }
+    getTimers();
   }, []);
 
   function handleClick(e) {
-    //console.log("newData: ", newData);
-    for (let i = 0; i < newData.chart.length; i++) {
-      newDates.push(newData.chart[i].date);
-      newValues.push(newData.chart[i].value);
+    console.log("chart: ", chart);
+    let result = chart.filter((time) => time.user_id === user._id);
+    for (let i = 0; i < chart.length; i++) {
+      newDates.push(chart[i].updatedAt.substr(0, 10));
+      newValues.push(chart[i].time);
     }
+
     sample.forEach((element) => {
       if (element.category === e.target.id) {
         setData({ dates: newDates, values: newValues });
