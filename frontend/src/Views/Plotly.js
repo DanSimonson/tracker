@@ -44,16 +44,20 @@ function Plotly() {
   function handleClick(e) {
     console.log("chart: ", chart);
     let result = chart.filter((time) => time.user_id === user._id);
-    for (let i = 0; i < chart.length; i++) {
-      newDates.push(chart[i].updatedAt.substr(0, 10));
-      newValues.push(chart[i].time);
-    }
-
-    sample.forEach((element) => {
-      if (element.category === e.target.id) {
-        setData({ dates: newDates, values: newValues });
+    if (result.length === 0) {
+      //no data to display
+    } else {
+      for (let i = 0; i < result.length; i++) {
+        newDates.push(result[i].updatedAt.substr(0, 10));
+        newValues.push(result[i].time);
       }
-    });
+
+      sample.forEach((element) => {
+        if (element.category === e.target.id) {
+          setData({ dates: newDates, values: newValues });
+        }
+      });
+    }
   }
 
   return (
