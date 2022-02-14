@@ -25,46 +25,48 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      <Link to="/" className="nav-logo move-left">
-        mariposaweb
-      </Link>
-      <div onClick={handleClick} className="nav-icon">
-        {open ? <FiX /> : <FiMenu />}
-      </div>
-      <ul className={open ? "nav-links active" : "nav-links"}>
-        <li className="nav-item">
-          <Link to="/" className="nav-link" onClick={closeMenu}>
-            Home
-          </Link>
-        </li>
-        {!tokenedUser ? (
+    <div>
+      <nav className="navbar">
+        <Link to="#" className="nav-logo move-left">
+          mariposaweb
+        </Link>
+        <div onClick={handleClick} className="nav-icon">
+          {open ? <FiX /> : <FiMenu />}
+        </div>
+        <ul className={open ? "nav-links active" : "nav-links"}>
           <li className="nav-item">
-            <Link to="/login" className="nav-link" onClick={closeMenu}>
-              Login
+            <Link to="/" className="nav-link" onClick={closeMenu}>
+              Home
             </Link>
           </li>
-        ) : (
-          <>
-            <li className="nav-logout">
-              <a>{tokenedUser.name} </a>
-            </li>
-            <li className="nav-logout">
-              <Link
-                to={`/plotly/${tokenedUser._id}`}
-                className="nav-link"
-                onClick={handleClick}
-              >
-                PlotPerformance
+          {!tokenedUser ? (
+            <li className="nav-item">
+              <Link to="/login" className="nav-link" onClick={closeMenu}>
+                Login
               </Link>
             </li>
-            <li className="nav-logout" onClick={logout}>
-              <a>Logout</a>
-            </li>
-          </>
-        )}
-      </ul>
-    </nav>
+          ) : (
+            <>
+              <li className="nav-logout">
+                <a>{tokenedUser.name} </a>
+              </li>
+              <li className="nav-logout">
+                <Link
+                  to={`/plotly/${tokenedUser._id}`}
+                  className="nav-link"
+                  onClick={handleClick}
+                >
+                  Plot Performance
+                </Link>
+              </li>
+              <li className="nav-logout" onClick={logout}>
+                <a>Logout</a>
+              </li>
+            </>
+          )}
+        </ul>
+      </nav>
+    </div>
   );
 }
 

@@ -20,6 +20,7 @@ function App() {
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/plotly/:id" element={<Plotly />} />
           <Route path="/performance/:id" element={<PerformancePage />} />
         </Route>

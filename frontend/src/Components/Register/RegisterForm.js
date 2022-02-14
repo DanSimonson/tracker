@@ -15,11 +15,11 @@ export default function LoginForm(props) {
   const [user, setUser] = useState("");
   const [redirectToHome, setRedirectToHome] = useState(false);
 
-  useEffect(() => {
-    //let temp = getItem('userInfo')
-    //let temp = localStorage.getItem("key") || "{}";
-    //setUser(JSON.parse(temp));
-  }, [redirectToHome]);
+  // useEffect(() => {
+  //   //let temp = getItem('userInfo')
+  //   //let temp = localStorage.getItem("key") || "{}";
+  //   //setUser(JSON.parse(temp));
+  // }, [redirectToHome]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -39,6 +39,8 @@ export default function LoginForm(props) {
       if (data) {
         localStorage.setItem("userInfo", JSON.stringify(data));
       }
+      navigate("/Home");
+      window.location.reload(false);
     }
   };
   return (

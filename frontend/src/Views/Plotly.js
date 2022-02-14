@@ -2,19 +2,18 @@ import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 import { useParams } from "react-router-dom";
 import { getUsers, selectUsers } from "../Redux/usersSlice";
-import useData from "../customHooks/useData";
 import { useSelector, useDispatch } from "react-redux";
 import { createTimer } from "../Redux/timerSlice";
 import expressAsyncHandler from "express-async-handler";
 import FormData from "../Utils/FormData";
 import axios from "axios";
+import "./Plotly.scss";
 
 function Plotly() {
   const [chart, setChart] = useState([]);
   const user = JSON.parse(localStorage.getItem("userInfo"));
   let dispatch = useDispatch();
   let { id } = useParams();
-  let newData = useData();
   let newDates = [];
   let newValues = [];
 
@@ -33,7 +32,6 @@ function Plotly() {
       axios
         .get("/api/timer/")
         .then((res) => {
-          console.log("res: ", res);
           setChart(res.data.timers);
         })
         .catch((error) => {
@@ -60,21 +58,33 @@ function Plotly() {
 
   return (
     <div>
-      <div>
-        <button onClick={handleClick} id="A">
-          {user ? `performance page for ${user.name}` : null}
-        </button>
+      <div className="headerButtonLayout">
+        <a id="A" onClick={handleClick}>
+          {user ? `Check performance for ${user.name}` : null}
+        </a>
       </div>
-      <Plot
-        data={[
-          {
-            type: "bar",
-            x: data.dates,
-            y: data.values,
-          },
-        ]}
-        layout={{ width: 800, height: 500, title: "interactive bar chart" }}
-      />
+      <div className="chartLayout">
+        <Plot
+          data={[
+            {
+              type: "bar",
+              x: data.dates,
+              y: data.values,
+            },
+          ]}
+          layout={{ width: 800, height: 500, title: "interactive bar chart" }}
+        />
+        <Plot
+          data={[
+            {
+              type: "scatter",
+              x: data.dates,
+              y: data.values,
+            },
+          ]}
+          layout={{ width: 800, height: 500, title: "interactive line chart" }}
+        />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,30 @@
+.headerButtonLayout {
+  //border: 5px solid blanchedalmond;
+  text-align: center;
+  margin: 1rem, auto;
+  padding: 2rem;
+}
+.chartLayout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#A {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 36px;
+  color: #fff;
+  letter-spacing: 5px;
+  border: 4px solid #fff;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: cubic-bezier(1, 0, 0, 1);
+}
+#A:hover {
+  color: #262626;
+  background: #fff;
+}
