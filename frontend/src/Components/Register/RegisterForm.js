@@ -15,19 +15,8 @@ export default function LoginForm(props) {
   const [user, setUser] = useState("");
   const [redirectToHome, setRedirectToHome] = useState(false);
 
-  // useEffect(() => {
-  //   //let temp = getItem('userInfo')
-  //   //let temp = localStorage.getItem("key") || "{}";
-  //   //setUser(JSON.parse(temp));
-  // }, [redirectToHome]);
-
   const submitHandler = async (e) => {
     e.preventDefault();
-    // if (user) {
-    //   console.log("user: ", user);
-    // } else {
-    //   console.log("no user found");
-    // }
     if (password !== confirmPassword) {
       alert("Password and confirm password are not match");
     } else {

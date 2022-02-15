@@ -16,6 +16,7 @@ export default function Clock() {
   const [start, setStart] = useState(false);
   const [timerStart, setTimerStart] = useState(0);
   const [timerEnd, setTimerEnd] = useState(0);
+  const [totalTime, setTotalTime] = useState("");
   const [res, setRes] = useState("");
   const [displayMessage, setDisplayMessage] = useState(false);
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
@@ -40,6 +41,19 @@ export default function Clock() {
             setMinutes(minutes);
             setDisplayMessage(!displayMessage);
             setRes(0);
+            let oldTimers = [];
+            axios.get("/api/timer/").then((res) => {
+              let date = new Date().toISOString().substr(0, 10);
+              FormData(
+                {
+                  time: parseFloat(totalTime),
+                  user_id: tokenedUser._id,
+                  name: tokenedUser.name,
+                },
+                res.data.timers,
+                date
+              );
+            });
           }
         } else {
           setSeconds(seconds - 1);
@@ -76,6 +90,7 @@ export default function Clock() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    setTotalTime(mins);
     setRes(mins);
     setMinutes(mins);
     setTimerStart(mins);

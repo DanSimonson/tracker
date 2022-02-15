@@ -42,7 +42,6 @@ const FormData = async (newData, data, date) => {
       console.log("error: ", error.message);
     }
   }
-  //return <div>formdata</div>;
 };
 
 export default FormData;
