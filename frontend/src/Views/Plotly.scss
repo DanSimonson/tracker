@@ -1,8 +1,8 @@
 .headerButtonLayout {
   //border: 5px solid blanchedalmond;
+  margin: 1rem auto 0 auto;
+  width: 50%;
   text-align: center;
-  margin: 1rem, auto;
-  padding: 2rem;
 }
 .chartLayout {
   display: flex;
@@ -32,4 +32,7 @@
   color: #fff; //#262626;
   background: darkgreen; //#fff;
   opacity: 1;
+}
+layout {
+  width: 1000;
 }

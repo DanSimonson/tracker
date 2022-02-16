@@ -8,6 +8,7 @@ import { createTimer } from "../../Redux/timerSlice";
 import "./Clock.scss";
 import { format } from "date-fns";
 import FormData from "../../Utils/FormData";
+import Navbar from "../Navbar/Navbar";
 export default function Clock() {
   const [calc, setCalc] = useState(false);
   const [mins, setMins] = useState("");
@@ -118,50 +119,52 @@ export default function Clock() {
   };
 
   return (
-    <div className="container">
-      <div className="subContainer glass">
-        <div className="pomodoro">
-          <div className="message ">
-            {displayMessage && <div>Start Timer</div>}
+    <>
+      <div className="container">
+        <div className="subContainer glass">
+          <div className="pomodoro">
+            <div className="message ">
+              {displayMessage && <div>Start Timer</div>}
+            </div>
+            <div className="timer">
+              {start ? (
+                <div>
+                  {timerMinutes}:{timerSeconds}
+                </div>
+              ) : (
+                <div>00:00</div>
+              )}
+            </div>
           </div>
-          <div className="timer">
-            {start ? (
-              <div>
-                {timerMinutes}:{timerSeconds}
-              </div>
-            ) : (
-              <div>00:00</div>
-            )}
+          <div className="form-container">
+            <form className="register-form " onSubmit={handleSubmit}>
+              <input
+                className="mainInput"
+                // style={{
+                //   padding: ".8rem",
+                //   width: "21.1rem",
+                //   marginLeft: "11px",
+                //   borderRadius: "5px",
+                // }}
+                value={mins}
+                onChange={handleChange}
+                id="min"
+                className="form-field"
+                type="number"
+                placeholder="Minutes"
+                name="min"
+              />
+              <button class="btn btn-background-slide">Start</button>
+              <button
+                class="btn btn-background-circle"
+                onClick={(e) => resetClock(e)}
+              >
+                Stop
+              </button>
+            </form>
           </div>
-        </div>
-        <div className="form-container">
-          <form className="register-form " onSubmit={handleSubmit}>
-            <input
-              className="mainInput"
-              // style={{
-              //   padding: ".8rem",
-              //   width: "21.1rem",
-              //   marginLeft: "11px",
-              //   borderRadius: "5px",
-              // }}
-              value={mins}
-              onChange={handleChange}
-              id="min"
-              className="form-field"
-              type="number"
-              placeholder="Minutes"
-              name="min"
-            />
-            <button class="btn btn-background-slide">Start</button>
-            <button
-              class="btn btn-background-circle"
-              onClick={(e) => resetClock(e)}
-            >
-              Stop
-            </button>
-          </form>
         </div>
       </div>
-    </div>
+    </>
   );
 }

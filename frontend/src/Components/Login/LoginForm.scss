@@ -14,23 +14,33 @@
 .form > div {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 1rem;
 }
 .form label {
   margin: 1rem 0;
-  display: block;
+  //display: block;
 }
 .form input {
   height: 35px;
   outline: none;
+  width: 19rem;
+  margin-left: 0;
 }
-.form button {
-  height: 35px;
-  cursor: pointer;
-}
+
 .form a {
   color: #fff;
   text-decoration: none;
+}
+#loginButton {
+  height: 55px;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 1.4rem;
+  //padding: 3rem;
+}
+.loginBtn {
+  padding: 1rem;
 }
 .topSpacer {
   height: 20%;

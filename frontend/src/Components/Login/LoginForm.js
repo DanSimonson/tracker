@@ -52,9 +52,8 @@ export default function LoginForm(props) {
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
-        <div>
-          <label />
-          <button className="" type="submit">
+        <div className="loginBtn">
+          <button id="loginButton" type="submit">
             Sign In
           </button>
         </div>

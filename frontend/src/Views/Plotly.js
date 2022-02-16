@@ -16,6 +16,7 @@ function Plotly() {
   let { id } = useParams();
   let newDates = [];
   let newValues = [];
+  let wdth = parseInt(1000);
 
   const sample = [
     {
@@ -76,7 +77,11 @@ function Plotly() {
               y: data.values,
             },
           ]}
-          layout={{ width: 900, height: 500, title: "interactive bar chart" }}
+          layout={{
+            width: 425,
+            height: 500,
+            title: "interactive bar chart",
+          }}
         />
         <Plot
           data={[
@@ -86,7 +91,11 @@ function Plotly() {
               y: data.values,
             },
           ]}
-          layout={{ width: 900, height: 500, title: "interactive line chart" }}
+          layout={{
+            width: 425,
+            height: 500,
+            title: "interactive line chart",
+          }}
         />
       </div>
     </div>
