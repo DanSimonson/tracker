@@ -76,7 +76,7 @@ function Plotly() {
               y: data.values,
             },
           ]}
-          layout={{ width: 800, height: 500, title: "interactive bar chart" }}
+          layout={{ width: 900, height: 500, title: "interactive bar chart" }}
         />
         <Plot
           data={[
@@ -86,7 +86,7 @@ function Plotly() {
               y: data.values,
             },
           ]}
-          layout={{ width: 800, height: 500, title: "interactive line chart" }}
+          layout={{ width: 900, height: 500, title: "interactive line chart" }}
         />
       </div>
     </div>

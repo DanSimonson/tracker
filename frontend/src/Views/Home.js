@@ -9,7 +9,11 @@ function Home() {
   //   setLoggedIn(!user);
   //   //window.location.reload();
   // }, []);
-  return <Clock />;
+  return (
+    <div style={{ height: "100vh", width: "100vw" }}>
+      <Clock />;
+    </div>
+  );
 }
 
 export default Home;

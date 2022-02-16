@@ -13,18 +13,23 @@
 }
 
 #A {
+  display: flex;
+  justify-content: center;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 36px;
-  color: #fff;
+  color: #222; //#fff;
   letter-spacing: 5px;
-  border: 4px solid #fff;
+  border: 4px solid darkgreen;
   padding: 10px 20px;
   box-sizing: border-box;
   cursor: pointer;
-  transition: cubic-bezier(1, 0, 0, 1);
+  border-radius: 8px;
+  opacity: 0.8;
+  transition: all 1s cubic-bezier(1, 0, 0, 1);
 }
 #A:hover {
-  color: #262626;
-  background: #fff;
+  color: #fff; //#262626;
+  background: darkgreen; //#fff;
+  opacity: 1;
 }

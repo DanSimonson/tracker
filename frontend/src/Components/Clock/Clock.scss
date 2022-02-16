@@ -1,5 +1,8 @@
 .pomodoro {
   font-size: 6em;
+  //border: 5px solid black;
+  text-align: center;
+  color: #fff;
 }
 
 .message {
@@ -8,6 +11,11 @@
   margin-bottom: 0.5em;
 }
 .container {
+  background-image: url("https://res.cloudinary.com/dmglopmul/image/upload/v1644965362/projectPhotos/tracker/tree.jpg");
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -16,11 +24,35 @@
 }
 
 .form-container {
+  //border: 5px solid white;
   width: 360px;
-  background-color: white;
+  //background-color: white;
   margin: auto;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  //box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
   padding: 10px;
+}
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  //border-radius: 20px;
+  //border: 1px solid rgba(255, 255, 255, 0.18);
+  //box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+.subContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .register-form {
@@ -37,14 +69,6 @@
   color: white;
 }
 
-.form-field {
-  margin: 10px 0 10px 0;
-  padding: 15px;
-  font-size: 16px;
-  border: 0;
-  font-family: "Roboto", sans-serif;
-}
-
 span {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
@@ -54,19 +78,165 @@ span {
 
 input {
   background: #f2f2f2;
+  padding: 0.8rem;
+  width: 21.1rem;
+  margin-left: 11px;
+  border-radius: 5px;
 }
 
 .error {
   border-style: solid;
   border: 2px solid #ffa4a4;
 }
-
 button {
-  background: #4caf50;
-  color: white;
+  margin: 1rem;
+  margin: 1rem;
+  width: 21.1rem;
+  margin-left: 11px;
+  border-radius: 5px;
+}
+.btn {
+  background-color: var(--background-color);
+  color: #222;
+  padding: 0.5em 1em;
+  border: none;
+  outline: none;
+  position: relative;
   cursor: pointer;
+
+  --background-color: #0af; //e3e3e3;
+  --border-size: 2px;
+  --accent-color: green; //#0af;
+}
+.btn.btn-background-slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -1;
+  background-color: var(--accent-color);
+
+  transition: transform 300ms ease-in-out;
+  transform: scaleX(0);
+  transform-origin: center;
 }
 
-button:disabled {
-  cursor: default;
+.btn.btn-background-slide:hover::before,
+.btn.btn-background-slide:focus::before {
+  transform: scaleX(1);
+}
+
+.btn.btn-background-slide {
+  transition: color 300ms ease-in-out;
+  z-index: 1;
+}
+
+.btn.btn-background-slide:hover,
+.btn.btn-background-slide:focus {
+  color: white;
+}
+
+.btn.btn-background-circle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-color: var(--background-color);
+  border-radius: 50%;
+  transition: transform 500ms ease-in-out;
+
+  transform: scale(1.5);
+}
+
+.btn.btn-background-circle:hover::before,
+.btn.btn-background-circle:focus::before {
+  transform: scale(0);
+}
+
+.btn.btn-background-circle {
+  z-index: 1;
+  overflow: hidden;
+  background-color: var(--accent-color);
+  transition: color 500ms ease-in-out;
+}
+
+.btn.btn-background-circle:hover,
+.btn.btn-background-circle:focus {
+  color: white;
+}
+.mainInput {
+  // margin: 1rem;
+  // padding: 0.8rem;
+  // width: 21.1rem;
+  // margin-left: 11px;
+  // border-radius: 5px;
+}
+// style={{
+//   padding: ".8rem",
+//   width: "21.1rem",
+//   marginLeft: "11px",
+//   borderRadius: "5px",
+// }}
+
+@media screen and (max-width: 480px) {
+  .subContainer {
+    width: 425px;
+    border: 5px solid green;
+  }
+  .btn.btn-background-slide {
+    width: 200px;
+    margin: 0rem auto 1rem auto;
+  }
+  .btn.btn-background-circle {
+    width: 200px;
+    margin: 0rem auto 1rem auto;
+  }
+
+  input#min.form-field {
+    width: 200px;
+    margin: 0 auto 1rem auto;
+  }
+}
+@media screen and (max-width: 375px) {
+  .subContainer {
+    width: 315px;
+    border: 5px solid red;
+  }
+  .btn.btn-background-slide {
+    width: 250px;
+    margin: 0 1rem 1rem 1rem;
+  }
+  .btn.btn-background-circle {
+    width: 250px;
+    margin: 0 1rem 1rem 1rem;
+  }
+  input#min.form-field {
+    width: 250px;
+    margin: 0 1rem 1rem 1rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .subContainer {
+    border: 5px solid red;
+    width: 315px;
+  }
+  .btn.btn-background-slide {
+    width: 250px;
+    margin: 0 1rem 1rem 1rem;
+  }
+  .btn.btn-background-circle {
+    width: 250px;
+    margin: 0 1rem 1rem 1rem;
+  }
+
+  input#min.form-field {
+    width: 250px;
+    margin: 0 1rem 1rem 1rem;
+  }
 }
