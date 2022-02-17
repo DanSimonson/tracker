@@ -64,7 +64,7 @@ function Plotly() {
   return (
     <div>
       <div className="headerButtonLayout">
-        <a id="A" onClick={handleClick}>
+        <a type="button" id="A" onClick={handleClick}>
           {user ? `Check performance for ${user.name}` : null}
         </a>
       </div>
@@ -78,9 +78,12 @@ function Plotly() {
             },
           ]}
           layout={{
-            width: 425,
-            height: 500,
-            title: "interactive bar chart",
+            responsive: true,
+            useResizeHandler: true,
+            autosize: true,
+            width: "100%",
+            height: "100%",
+            title: "Performance Bar Chart",
           }}
         />
         <Plot
@@ -92,9 +95,12 @@ function Plotly() {
             },
           ]}
           layout={{
-            width: 425,
-            height: 500,
-            title: "interactive line chart",
+            responsive: true,
+            useResizeHandler: true,
+            autosize: true,
+            width: "100%",
+            height: "100%",
+            title: "Performance Line Chart",
           }}
         />
       </div>

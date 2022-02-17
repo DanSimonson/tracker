@@ -47,9 +47,9 @@ function Navbar() {
             </li>
           ) : (
             <>
-              <li className="nav-logout">
+              {/* <li className="nav-logout">
                 <a>{tokenedUser.name} </a>
-              </li>
+              </li> */}
               <li className="nav-logout">
                 <Link
                   to={`/plotly/${tokenedUser._id}`}
@@ -61,6 +61,9 @@ function Navbar() {
               </li>
               <li className="nav-logout" onClick={logout}>
                 <a>Logout</a>
+              </li>
+              <li className="nav-logout">
+                <a>{tokenedUser.name} </a>
               </li>
             </>
           )}

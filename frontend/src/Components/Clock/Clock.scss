@@ -78,12 +78,13 @@ span {
   margin-bottom: 15px;
 }
 
-input {
+input#min.form-field {
   background: #f2f2f2;
   padding: 0.8rem;
-  width: 21.1rem;
+  width: 19.2rem; //21.1rem;
   margin-left: 11px;
   border-radius: 5px;
+  outline: none;
 }
 
 .error {
@@ -171,19 +172,6 @@ button {
 .btn.btn-background-circle:focus {
   color: white;
 }
-.mainInput {
-  // margin: 1rem;
-  // padding: 0.8rem;
-  // width: 21.1rem;
-  // margin-left: 11px;
-  // border-radius: 5px;
-}
-// style={{
-//   padding: ".8rem",
-//   width: "21.1rem",
-//   marginLeft: "11px",
-//   borderRadius: "5px",
-// }}
 
 @media screen and (max-width: 480px) {
   .subContainer {
@@ -208,16 +196,16 @@ button {
     width: 315px;
   }
   .btn.btn-background-slide {
-    width: 250px;
-    margin: 0 1rem 1rem 1rem;
+    width: 200px;
+    margin: 0 auto 1rem auto;
   }
   .btn.btn-background-circle {
-    width: 250px;
-    margin: 0 1rem 1rem 1rem;
+    width: 200px;
+    margin: 0 auto 1rem auto;
   }
   input#min.form-field {
-    width: 250px;
-    margin: 0 1rem 1rem 1rem;
+    width: 200px;
+    margin: 0 auto 1rem auto;
   }
 }
 
@@ -226,16 +214,16 @@ button {
     width: 315px;
   }
   .btn.btn-background-slide {
-    width: 250px;
-    margin: 0 1rem 1rem 1rem;
+    width: 200px;
+    margin: 0 auto 1rem auto;
   }
   .btn.btn-background-circle {
-    width: 250px;
-    margin: 0 1rem 1rem 1rem;
+    width: 200px;
+    margin: 0 auto 1rem auto;
   }
 
   input#min.form-field {
-    width: 250px;
-    margin: 0 1rem 1rem 1rem;
+    width: 200px;
+    margin: 0 auto 1rem auto;
   }
 }
