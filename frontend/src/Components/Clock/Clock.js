@@ -154,9 +154,9 @@ export default function Clock() {
                 placeholder="Minutes"
                 name="min"
               />
-              <button class="btn btn-background-slide">Start</button>
+              <button className="btn btn-background-slide">Start</button>
               <button
-                class="btn btn-background-circle"
+                className="btn btn-background-circle"
                 onClick={(e) => resetClock(e)}
               >
                 Stop
