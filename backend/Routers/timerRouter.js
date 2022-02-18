@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import expressAsyncHandler from "express-async-handler";
-import Timer from "../Models/timerModel.js";
+import Timer from "../Models/TimerModel.js";
 
 const timerRouter = express.Router();
 
