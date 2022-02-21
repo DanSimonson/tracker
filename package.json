@@ -5,8 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+    "build": "cd client && npm install && npm run build",
+    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
   "author": "Dan Simonson",
   "license": "ISC",
@@ -22,7 +22,7 @@
     "nodemon": "^2.0.15"
   },
   "engines": {
-    "node": "12.11.1",
+    "node": "12.4.0",
     "npm": "6.9.0"
   }
 }
