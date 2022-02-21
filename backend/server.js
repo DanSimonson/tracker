@@ -34,8 +34,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
+console.log("server.js port: ", port);
 
 app.listen(5000, () => {
-  console.log(`serve at http://localhost:${PORT}`);
+  console.log(`serve at http://localhost:${port}`);
 });
