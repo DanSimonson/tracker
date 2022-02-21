@@ -4,7 +4,7 @@ import path from "path";
 import userRouter from "./Routers/userRouter.js";
 import timerRouter from "./Routers/timerRouter.js";
 import connectDB from "./Config/db.js";
-
+//instantiate env vars
 dotenv.config();
 connectDB();
 const app = express();
