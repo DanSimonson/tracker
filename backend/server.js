@@ -4,10 +4,11 @@ import path from "path";
 import userRouter from "./Routers/userRouter.js";
 import timerRouter from "./Routers/timerRouter.js";
 import connectDB from "./Config/db.js";
-//instantiate env vars
+
 dotenv.config();
 connectDB();
 const app = express();
+const __dirname = path.resolve();
 
 //middleware
 app.use(express.json());
@@ -20,11 +21,7 @@ app.use("/api/timer", timerRouter);
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
-// app.get("/api/products", (req, res) => {
-//   res.send(data.products);
-// });
 
-const __dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/frontend/build")));
 
@@ -36,11 +33,6 @@ if (process.env.NODE_ENV === "production") {
     res.send("Api running");
   });
 }
-
-// app.use(express.static(path.join(__dirname, "/frontend/build")));
-// app.get("*", (req, res) =>
-//   res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
-// );
 
 const PORT = process.env.PORT || 5000;
 
