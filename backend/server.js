@@ -1,10 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
-//import productRouter from "./Routers/productRouter.js";
 import userRouter from "./Routers/userRouter.js";
 import timerRouter from "./Routers/timerRouter.js";
-//import data from "./data.js";
 import connectDB from "./Config/db.js";
 
 dotenv.config();
