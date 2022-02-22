@@ -14,7 +14,7 @@
 
 > JWT Authentication is used for login and registration and includes protected routes.
 
-[Click Here For DEMO ](https://spa-mariposa.herokuapp.com/)
+[Click Here For DEMO ](https://developer-tracker.herokuapp.com/)
 
 ```
 
