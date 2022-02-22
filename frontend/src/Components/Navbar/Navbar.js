@@ -36,7 +36,7 @@ function Navbar() {
         <ul className={open ? "nav-links active" : "nav-links"}>
           <li className="nav-item">
             <Link to="/" className="nav-link" onClick={closeMenu}>
-              Home
+              Track Performance
             </Link>
           </li>
           {!tokenedUser ? (
