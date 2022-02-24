@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import useAuth from "../../customHooks/useAuth";
-import useData from "../../customHooks/useData";
-import { add } from "../../Redux/timerSlice";
+//import useData from "../../customHooks/useData";
+//import { add } from "../../Redux/timerSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { createTimer } from "../../Redux/timerSlice";
+//import { createTimer } from "../../Redux/timerSlice";
 import "./Clock.scss";
 import { format } from "date-fns";
 import FormData from "../../Utils/FormData";
@@ -24,7 +24,7 @@ export default function Clock() {
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
   let tokenedUser = useAuth();
   const dispatch = useDispatch();
-  let newData = useData();
+  //let newData = useData();
 
   useEffect(async () => {
     let interval = setInterval(() => {
