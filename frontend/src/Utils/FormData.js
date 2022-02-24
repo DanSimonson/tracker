@@ -1,5 +1,4 @@
 import React from "react";
-import usersSlice from "../Redux/usersSlice";
 import axios from "axios";
 
 const FormData = async (newData, data, date) => {

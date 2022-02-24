@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import useAuth from "../../customHooks/useAuth";
-//import useData from "../../customHooks/useData";
-//import { add } from "../../Redux/timerSlice";
-import { useDispatch, useSelector } from "react-redux";
-//import { createTimer } from "../../Redux/timerSlice";
 import "./Clock.scss";
 import { format } from "date-fns";
 import FormData from "../../Utils/FormData";
 import Navbar from "../Navbar/Navbar";
+
 export default function Clock() {
   const [calc, setCalc] = useState(false);
   const [mins, setMins] = useState("");
@@ -23,8 +20,6 @@ export default function Clock() {
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
   let tokenedUser = useAuth();
-  const dispatch = useDispatch();
-  //let newData = useData();
 
   useEffect(async () => {
     let interval = setInterval(() => {
@@ -140,12 +135,6 @@ export default function Clock() {
             <form className="register-form " onSubmit={handleSubmit}>
               <input
                 className="mainInput"
-                // style={{
-                //   padding: ".8rem",
-                //   width: "21.1rem",
-                //   marginLeft: "11px",
-                //   borderRadius: "5px",
-                // }}
                 value={mins}
                 onChange={handleChange}
                 id="min"
