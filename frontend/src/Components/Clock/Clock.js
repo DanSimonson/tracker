@@ -64,6 +64,7 @@ export default function Clock() {
 
       try {
         let { data } = await axios.get("/api/timer/");
+        console.log("data.timers: ", data.timers);
         let date = new Date().toISOString().substr(0, 10);
         FormData(
           { time: time, user_id: user_id, name: name },

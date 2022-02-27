@@ -36,7 +36,6 @@ function Plotly() {
   }, []);
 
   function handleClick(e) {
-    //console.log("chart: ", chart);
     let result = chart.filter((time) => time.user_id === user._id);
     if (result.length === 0) {
       //no data to display
