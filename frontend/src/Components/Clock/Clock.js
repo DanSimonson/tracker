@@ -34,14 +34,23 @@ export default function Clock() {
             setSeconds(59);
             setMinutes(minutes - 1);
           } else {
-            let minutes = displayMessage ? "" : "";
-            let seconds = 0;
-
-            setSeconds(seconds);
-            setMinutes(minutes);
+            //let minutes = displayMessage ? "" : "";
+            //let seconds = 0;
+            //setSeconds(seconds);
+            //setMinutes(minutes);
+            //setDisplayMessage(!displayMessage);
+            //setRes(0);
+            //new code
+            //setStart(false);
+            /**
+             *new code
+             */
+            setCalc(false);
+            setStart(false);
+            setSeconds(1);
+            setMinutes(0);
             setDisplayMessage(!displayMessage);
-            setRes(0);
-            let oldTimers = [];
+            /** end new code */
             axios.get("/api/timer/").then((res) => {
               let date = new Date().toISOString().substr(0, 10);
               FormData(
@@ -177,9 +186,9 @@ export default function Clock() {
       <div className="container">
         <div className="subContainer glass">
           <div className="pomodoro">
-            <div className="message ">
+            {/* <div className="message ">
               {displayMessage && <div>Start Timer</div>}
-            </div>
+            </div> */}
             <div className="timer">
               {start ? (
                 <div>
