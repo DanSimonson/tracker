@@ -19,7 +19,6 @@ export const setTimers = createAsyncThunk(
       user_id: newData.user_id,
       name: newData.name,
     });
-    console.log("data: ", data.timer);
     return data.timer;
   }
 );
@@ -34,7 +33,6 @@ const timersSlice = createSlice({
   reducers: {
     timerAdded(state, action) {
       state.newTimers.push(action.payload);
-      //state.timers = [...state.timers, ...action.payload];
     },
   },
   extraReducers: {

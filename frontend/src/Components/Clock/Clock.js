@@ -34,23 +34,11 @@ export default function Clock() {
             setSeconds(59);
             setMinutes(minutes - 1);
           } else {
-            //let minutes = displayMessage ? "" : "";
-            //let seconds = 0;
-            //setSeconds(seconds);
-            //setMinutes(minutes);
-            //setDisplayMessage(!displayMessage);
-            //setRes(0);
-            //new code
-            //setStart(false);
-            /**
-             *new code
-             */
             setCalc(false);
             setStart(false);
             setSeconds(1);
             setMinutes(0);
             setDisplayMessage(!displayMessage);
-            /** end new code */
             axios.get("/api/timer/").then((res) => {
               let date = new Date().toISOString().substr(0, 10);
               FormData(
@@ -137,15 +125,7 @@ export default function Clock() {
     let tempArr = duplicate.slice(-1);
     if (tempArr.includes(undefined)) {
       try {
-        //let newTimer = newData.time;
         dispatch(setTimers(newData));
-        dispatch(
-          timerAdded({
-            time: newData.time,
-            user_id: newData.user_id,
-            name: newData.name,
-          })
-        );
       } catch (error) {
         console.log("error: ", error.message);
       }
@@ -158,19 +138,6 @@ export default function Clock() {
         if (response.statusText === "OK") {
           try {
             dispatch(setTimers(newData));
-            dispatch(
-              timerAdded({
-                time: newData.time,
-                user_id: newData.user_id,
-                name: newData.name,
-              })
-            );
-            // const timersResult = await axios.post("/api/timer/", {
-            //   time: newTime,
-            //   user_id: newData.user_id,
-            //   name: newData.name,
-            // });
-            // return timersResult;
           } catch (error) {
             console.log("error: ", error.message);
           }
@@ -186,9 +153,6 @@ export default function Clock() {
       <div className="container">
         <div className="subContainer glass">
           <div className="pomodoro">
-            {/* <div className="message ">
-              {displayMessage && <div>Start Timer</div>}
-            </div> */}
             <div className="timer">
               {start ? (
                 <div>
