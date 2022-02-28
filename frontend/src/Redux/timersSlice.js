@@ -10,18 +10,33 @@ export const getTimers = createAsyncThunk("timers/getTimers", async () => {
   let { data } = await axios.get("/api/timer/");
   return data.timers;
 });
-// const initialState = [
-//   { id: "1", name: "Dave Patrick", email: "dave@gmail.com" },
-//   { id: "2", name: "Hank Gluhwein", email: "hank@gmail.com" },
-// ];
+
+export const setTimers = createAsyncThunk(
+  "timers/setTimers",
+  async (newData) => {
+    let { data } = await axios.post("/api/timer/", {
+      time: newData.time,
+      user_id: newData.user_id,
+      name: newData.name,
+    });
+    console.log("data: ", data.timer);
+    return data.timer;
+  }
+);
 
 const timersSlice = createSlice({
   name: "timers",
   initialState: {
     timers: [],
+    newTimers: [],
     loading: false,
   },
-  reducers: {},
+  reducers: {
+    timerAdded(state, action) {
+      state.newTimers.push(action.payload);
+      //state.timers = [...state.timers, ...action.payload];
+    },
+  },
   extraReducers: {
     [getTimers.pending]: (state, action) => {
       state.loading = true;
@@ -29,7 +44,6 @@ const timersSlice = createSlice({
     [getTimers.fulfilled]: (state, action) => {
       state.loading = false;
       state.timers = [...state.timers, ...action.payload];
-      //state.timers =
     },
     [getTimers.rejected]: (state, action) => {
       state.loading = false;
@@ -37,6 +51,6 @@ const timersSlice = createSlice({
   },
 });
 
-//export const { userAdded } = usersSlice.actions;
+export const { timerAdded } = timersSlice.actions;
 
 export default timersSlice.reducer;

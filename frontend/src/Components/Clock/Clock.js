@@ -3,10 +3,12 @@ import axios from "axios";
 import useAuth from "../../customHooks/useAuth";
 import "./Clock.scss";
 import { format } from "date-fns";
-import FormData from "../../Utils/FormData";
+import { getTimers, timerAdded, setTimers } from "../../Redux/timersSlice";
 import Navbar from "../Navbar/Navbar";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Clock() {
+  const [timerData, setTimerData] = useState("");
   const [calc, setCalc] = useState(false);
   const [mins, setMins] = useState("");
   const [minutes, setMinutes] = useState(0);
@@ -20,6 +22,8 @@ export default function Clock() {
   const timerMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
   let tokenedUser = useAuth();
+  let dispatch = useDispatch();
+  let { timers, loading } = useSelector((state) => state.timers);
 
   useEffect(async () => {
     let interval = setInterval(() => {
@@ -42,7 +46,7 @@ export default function Clock() {
               let date = new Date().toISOString().substr(0, 10);
               FormData(
                 {
-                  time: parseFloat(totalTime),
+                  time: parseFloat(totalTime * 60),
                   user_id: tokenedUser._id,
                   name: tokenedUser.name,
                 },
@@ -64,7 +68,6 @@ export default function Clock() {
 
       try {
         let { data } = await axios.get("/api/timer/");
-        console.log("data.timers: ", data.timers);
         let date = new Date().toISOString().substr(0, 10);
         FormData(
           { time: time, user_id: user_id, name: name },
@@ -112,6 +115,61 @@ export default function Clock() {
       setRes(res * 60 - left);
     }
     setCalc(true);
+  };
+  const FormData = async (newData, data, date) => {
+    console.log("newData: ", newData);
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+    let result = data.filter((time) => time.user_id === user._id);
+    const duplicate = result.map((item) => {
+      if (item.updatedAt.substr(0, 10) === date) {
+        return item;
+      }
+    });
+    let tempArr = duplicate.slice(-1);
+    if (tempArr.includes(undefined)) {
+      try {
+        //let newTimer = newData.time;
+        dispatch(setTimers(newData));
+        dispatch(
+          timerAdded({
+            time: newData.time,
+            user_id: newData.user_id,
+            name: newData.name,
+          })
+        );
+      } catch (error) {
+        console.log("error: ", error.message);
+      }
+    } else {
+      let newTimer = tempArr[0].time + newData.time;
+      newData.time = newTimer;
+      console.log("newData: ", newData);
+      try {
+        const response = await axios.delete("/api/timer/" + tempArr[0]._id);
+        if (response.statusText === "OK") {
+          try {
+            dispatch(setTimers(newData));
+            dispatch(
+              timerAdded({
+                time: newData.time,
+                user_id: newData.user_id,
+                name: newData.name,
+              })
+            );
+            // const timersResult = await axios.post("/api/timer/", {
+            //   time: newTime,
+            //   user_id: newData.user_id,
+            //   name: newData.name,
+            // });
+            // return timersResult;
+          } catch (error) {
+            console.log("error: ", error.message);
+          }
+        }
+      } catch (error) {
+        console.log("error: ", error.message);
+      }
+    }
   };
 
   return (
