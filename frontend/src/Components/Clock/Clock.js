@@ -23,7 +23,6 @@ export default function Clock() {
   const timerSeconds = seconds < 10 ? `0${seconds}` : seconds;
   let tokenedUser = useAuth();
   let dispatch = useDispatch();
-  let { timers, loading } = useSelector((state) => state.timers);
 
   useEffect(async () => {
     let interval = setInterval(() => {
@@ -115,6 +114,7 @@ export default function Clock() {
   };
   const FormData = async (newData, data, date) => {
     console.log("newData: ", newData);
+    console.log("data: ", data);
     const user = JSON.parse(localStorage.getItem("userInfo"));
     let result = data.filter((time) => time.user_id === user._id);
     const duplicate = result.map((item) => {
