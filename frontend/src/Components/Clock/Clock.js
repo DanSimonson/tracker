@@ -121,7 +121,6 @@ export default function Clock() {
       }
     });
     let tempArr = duplicate.slice(-1);
-    //tempArr.includes(undefined)
     if (tempArr.length === 0) {
       try {
         dispatch(setTimers(newData));
