@@ -15,13 +15,6 @@ const FormData = async (newData, data, date) => {
   let tempArr = duplicate.slice(-1);
   if (tempArr.includes(undefined)) {
     try {
-      // dispatch(
-      //   timerAdded({
-      //     time: newData.time,
-      //     user_id: newData.user_id,
-      //     name: newData.name,
-      //   })
-      // );
       const timersResult = await axios.post("/api/timer/", {
         time: newData.time,
         user_id: newData.user_id,
@@ -37,13 +30,6 @@ const FormData = async (newData, data, date) => {
       const response = await axios.delete("/api/timer/" + tempArr[0]._id);
       if (response.statusText === "OK") {
         try {
-          // dispatch(
-          //   timerAdded({
-          //     time: newTime,
-          //     user_id: newData.user_id,
-          //     name: newData.name,
-          //   })
-          // );
           const timersResult = await axios.post("/api/timer/", {
             time: newTime,
             user_id: newData.user_id,

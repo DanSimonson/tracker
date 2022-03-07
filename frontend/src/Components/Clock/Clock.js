@@ -113,8 +113,6 @@ export default function Clock() {
     setCalc(true);
   };
   const FormData = async (newData, data, date) => {
-    console.log("newData: ", newData);
-    console.log("data: ", data);
     const user = JSON.parse(localStorage.getItem("userInfo"));
     let result = data.filter((time) => time.user_id === user._id);
     const duplicate = result.map((item) => {
@@ -132,7 +130,7 @@ export default function Clock() {
     } else {
       let newTimer = tempArr[0].time + newData.time;
       newData.time = newTimer;
-      console.log("newData: ", newData);
+
       try {
         const response = await axios.delete("/api/timer/" + tempArr[0]._id);
         if (response.statusText === "OK") {

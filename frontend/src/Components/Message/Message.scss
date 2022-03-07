@@ -1,0 +1,20 @@
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+}
+h2 {
+  span {
+    background: darkblue;
+    color: #ffff;
+    border: 10px solid darkblue;
+    border-radius: 50%;
+    font-size: 1rem;
+  }
+}
+.headerMessage {
+  font-weight: bold;
+  text-decoration: underline;
+}

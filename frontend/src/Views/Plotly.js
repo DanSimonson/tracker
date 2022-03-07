@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
 import { useParams } from "react-router-dom";
+import Message from "../Components/Message/Message";
 import axios from "axios";
 import "./Plotly.scss";
 
 function Plotly() {
+  const [showMessage, setShowMessage] = useState(false);
   const [chart, setChart] = useState([]);
   const user = JSON.parse(localStorage.getItem("userInfo"));
   let { id } = useParams();
@@ -36,6 +38,7 @@ function Plotly() {
   }, []);
 
   function handleClick(e) {
+    setShowMessage(true);
     let result = chart.filter((time) => time.user_id === user._id);
     if (result.length === 0) {
       //no data to display
@@ -95,6 +98,7 @@ function Plotly() {
             title: "Performance Line Chart",
           }}
         />
+        {showMessage && <Message chart={chart} user={user} />}
       </div>
     </div>
   );
